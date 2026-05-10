@@ -1,0 +1,5041 @@
+{
+  "inMemoryTables": [
+    {
+      "data": [
+        {
+          "cra7c_examid": "e9450f58-75f9-4d47-a55d-d2c533a0d674",
+          "cra7c_title": "JavaScript Fundamentals Test",
+          "cra7c_description": "Comprehensive assessment covering ES6+ features, async programming, and DOM manipulation",
+          "cra7c_durationminutes": 90,
+          "cra7c_accesscode": "JS2024A",
+          "cra7c_passingscore": 70,
+          "cra7c_createdby": "teacher_001",
+          "cra7c_createdat": "2026-05-01T08:00:00.000Z",
+          "cra7c_status": 793370001,
+          "cra7c_showresultsimmediately": true,
+          "cra7c_allowreview": true,
+          "cra7c_startdatetime": "2026-05-08T09:00:00.000Z",
+          "cra7c_enddatetime": "2026-05-15T23:59:00.000Z"
+        },
+        {
+          "cra7c_examid": "caa91f27-cc6c-40d1-98ae-50d74c2a1305",
+          "cra7c_title": "IELTS Practice Exam",
+          "cra7c_description": "Full-length IELTS Academic practice test with all four skills: Listening, Reading, Writing, and Speaking",
+          "cra7c_durationminutes": 180,
+          "cra7c_accesscode": "IELTS24B",
+          "cra7c_passingscore": 60,
+          "cra7c_createdby": "teacher_002",
+          "cra7c_createdat": "2026-05-02T09:00:00.000Z",
+          "cra7c_status": 793370001,
+          "cra7c_showresultsimmediately": false,
+          "cra7c_allowreview": true,
+          "cra7c_startdatetime": "2026-05-10T08:00:00.000Z",
+          "cra7c_enddatetime": "2026-05-20T20:00:00.000Z"
+        }
+      ],
+      "entity": {
+        "MetadataId": "8370e41f-4578-4627-a28e-94ee99d42c82",
+        "Attributes": [
+          {
+            "MetadataId": "fc8a92d6-0e5d-4dae-b440-d871fe0b3960",
+            "IsPrimaryName": true,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_Title",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Title",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "String",
+            "AttributeTypeName": {
+              "Value": "StringType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 850,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.StringAttributeMetadata"
+          },
+          {
+            "MetadataId": "5eb4077b-8f4f-4147-9ecd-b204ca700622",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_Description",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Description",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "Memo",
+            "AttributeTypeName": {
+              "Value": "MemoType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 2000,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.MemoAttributeMetadata"
+          },
+          {
+            "MetadataId": "a66a4284-fbfc-4df6-8467-746f50433215",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_DurationMinutes",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Duration (Minutes)",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Integer",
+            "AttributeTypeName": {
+              "Value": "IntegerType"
+            },
+            "MaxValue": 2147483647,
+            "MinValue": -2147483648,
+            "Format": "None",
+            "@odata.type": "Microsoft.Dynamics.CRM.IntegerAttributeMetadata"
+          },
+          {
+            "MetadataId": "cdcb2638-829f-448a-8d80-f46693369bf3",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_AccessCode",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Access Code",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "String",
+            "AttributeTypeName": {
+              "Value": "StringType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 100,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.StringAttributeMetadata"
+          },
+          {
+            "MetadataId": "a607913c-cea6-4a17-8601-43d60f4ffccf",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_PassingScore",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Passing Score (%)",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Integer",
+            "AttributeTypeName": {
+              "Value": "IntegerType"
+            },
+            "MaxValue": 2147483647,
+            "MinValue": -2147483648,
+            "Format": "None",
+            "@odata.type": "Microsoft.Dynamics.CRM.IntegerAttributeMetadata"
+          },
+          {
+            "MetadataId": "66638a8a-9ccc-4644-9105-126944f86050",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_CreatedBy",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Created By",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "String",
+            "AttributeTypeName": {
+              "Value": "StringType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 100,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.StringAttributeMetadata"
+          },
+          {
+            "MetadataId": "05a52d7f-a2be-4596-bc3d-dae93591be90",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_CreatedAt",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Created At",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "ImeMode": "Auto",
+            "AttributeType": "DateTime",
+            "AttributeTypeName": {
+              "Value": "DateTimeType"
+            },
+            "Format": "DateAndTime",
+            "DateTimeBehavior": {
+              "Value": "UserLocal"
+            },
+            "CanChangeDateTimeBehavior": {
+              "Value": true,
+              "CanBeChanged": true,
+              "ManagedPropertyLogicalName": "canmodifybehavior"
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.DateTimeAttributeMetadata"
+          },
+          {
+            "MetadataId": "c2f406e4-b4ca-4f61-9c1c-e1c7abac2940",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_Status",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Status",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Picklist",
+            "AttributeTypeName": {
+              "Value": "PicklistType"
+            },
+            "DefaultFormValue": -1,
+            "OptionSet": {
+              "IsCustomOptionSet": true,
+              "IsGlobal": false,
+              "IsCustomizable": {
+                "Value": true,
+                "CanBeChanged": false,
+                "ManagedPropertyLogicalName": "iscustomizable"
+              },
+              "ExternalTypeName": "",
+              "OptionSetType": "Picklist",
+              "Description": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "DisplayName": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "Status",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "Options": [
+                {
+                  "Value": 793370000,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Draft",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370001,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Published",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370002,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Closed",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.PicklistAttributeMetadata"
+          },
+          {
+            "MetadataId": "3df1af7f-6c97-4c2d-b6f6-bd6b4f5cb8ca",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_ShowResultsImmediately",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Show Results Immediately",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Boolean",
+            "AttributeTypeName": {
+              "Value": "BooleanType"
+            },
+            "DefaultValue": false,
+            "OptionSet": {
+              "IsCustomOptionSet": true,
+              "IsGlobal": false,
+              "IsCustomizable": {
+                "Value": true,
+                "CanBeChanged": false,
+                "ManagedPropertyLogicalName": "iscustomizable"
+              },
+              "IsManaged": false,
+              "ExternalTypeName": "",
+              "OptionSetType": "Boolean",
+              "Description": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "DisplayName": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "Show Results Immediately",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "TrueOption": {
+                "Value": 1,
+                "IsManaged": false,
+                "ExternalValue": "",
+                "Label": {
+                  "LocalizedLabels": [
+                    {
+                      "Label": "Yes",
+                      "LanguageCode": 1033
+                    }
+                  ]
+                },
+                "Description": {
+                  "LocalizedLabels": []
+                }
+              },
+              "FalseOption": {
+                "Value": 0,
+                "IsManaged": false,
+                "ExternalValue": "",
+                "Label": {
+                  "LocalizedLabels": [
+                    {
+                      "Label": "No",
+                      "LanguageCode": 1033
+                    }
+                  ]
+                },
+                "Description": {
+                  "LocalizedLabels": []
+                }
+              }
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.BooleanAttributeMetadata"
+          },
+          {
+            "MetadataId": "81f3fc44-4f20-4287-94e4-372c6432a141",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_AllowReview",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Allow Review",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Boolean",
+            "AttributeTypeName": {
+              "Value": "BooleanType"
+            },
+            "DefaultValue": false,
+            "OptionSet": {
+              "IsCustomOptionSet": true,
+              "IsGlobal": false,
+              "IsCustomizable": {
+                "Value": true,
+                "CanBeChanged": false,
+                "ManagedPropertyLogicalName": "iscustomizable"
+              },
+              "IsManaged": false,
+              "ExternalTypeName": "",
+              "OptionSetType": "Boolean",
+              "Description": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "DisplayName": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "Allow Review",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "TrueOption": {
+                "Value": 1,
+                "IsManaged": false,
+                "ExternalValue": "",
+                "Label": {
+                  "LocalizedLabels": [
+                    {
+                      "Label": "Yes",
+                      "LanguageCode": 1033
+                    }
+                  ]
+                },
+                "Description": {
+                  "LocalizedLabels": []
+                }
+              },
+              "FalseOption": {
+                "Value": 0,
+                "IsManaged": false,
+                "ExternalValue": "",
+                "Label": {
+                  "LocalizedLabels": [
+                    {
+                      "Label": "No",
+                      "LanguageCode": 1033
+                    }
+                  ]
+                },
+                "Description": {
+                  "LocalizedLabels": []
+                }
+              }
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.BooleanAttributeMetadata"
+          },
+          {
+            "MetadataId": "4e65739a-e54b-4c03-bf7d-7a027cf42a43",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_StartDateTime",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Start Date Time",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "ImeMode": "Auto",
+            "AttributeType": "DateTime",
+            "AttributeTypeName": {
+              "Value": "DateTimeType"
+            },
+            "Format": "DateAndTime",
+            "DateTimeBehavior": {
+              "Value": "UserLocal"
+            },
+            "CanChangeDateTimeBehavior": {
+              "Value": true,
+              "CanBeChanged": true,
+              "ManagedPropertyLogicalName": "canmodifybehavior"
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.DateTimeAttributeMetadata"
+          },
+          {
+            "MetadataId": "d14325ca-dc77-4734-b4dc-a2e788b2ba3b",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_EndDateTime",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "End Date Time",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "ImeMode": "Auto",
+            "AttributeType": "DateTime",
+            "AttributeTypeName": {
+              "Value": "DateTimeType"
+            },
+            "Format": "DateAndTime",
+            "DateTimeBehavior": {
+              "Value": "UserLocal"
+            },
+            "CanChangeDateTimeBehavior": {
+              "Value": true,
+              "CanBeChanged": true,
+              "ManagedPropertyLogicalName": "canmodifybehavior"
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.DateTimeAttributeMetadata"
+          }
+        ],
+        "OwnershipType": "UserOwned",
+        "PrimaryNameAttribute": "cra7c_title",
+        "SchemaName": "cra7c_Exam",
+        "HasNotes": false,
+        "HasActivities": false,
+        "IsAvailableOffline": false,
+        "IsActivity": false,
+        "ActivityTypeMask": 0,
+        "IsSolutionAware": false,
+        "Description": {
+          "LocalizedLabels": [
+            {
+              "Label": "Main exam container for assessments",
+              "LanguageCode": 1033
+            }
+          ]
+        },
+        "DisplayCollectionName": {
+          "LocalizedLabels": [
+            {
+              "Label": "Exams",
+              "LanguageCode": 1033
+            }
+          ]
+        },
+        "DisplayName": {
+          "LocalizedLabels": [
+            {
+              "Label": "Exam",
+              "LanguageCode": 1033
+            }
+          ]
+        },
+        "IsAuditEnabled": {
+          "Value": false
+        },
+        "IsValidForQueue": {
+          "Value": false
+        },
+        "IsConnectionsEnabled": {
+          "Value": false
+        },
+        "IsDuplicateDetectionEnabled": {
+          "Value": true
+        },
+        "IsDocumentManagementEnabled": false,
+        "EntityColor": null,
+        "IsRetentionEnabled": false,
+        "SyncToExternalSearchIndex": false,
+        "AutoRouteToOwnerQueue": false,
+        "IsSLAEnabled": false,
+        "IsQuickCreateEnabled": false,
+        "IsActivityParty": false,
+        "HasFeedback": false,
+        "AutoCreateAccessTeams": false,
+        "ChangeTrackingEnabled": false,
+        "IsKnowledgeManagementEnabled": false,
+        "EntityHelpUrlEnabled": false,
+        "EntityHelpUrl": null,
+        "IsMailMergeEnabled": {
+          "Value": true
+        },
+        "IsOfflineInMobileClient": {
+          "Value": false
+        },
+        "ManyToOneRelationships": [],
+        "@odata.type": "Microsoft.Dynamics.CRM.EntityMetadata"
+      },
+      "dataPayloadFormat": "Dataverse",
+      "tableSourceType": "DataModelProposal"
+    },
+    {
+      "data": [
+        {
+          "cra7c_sectionid": "0959ae4e-9079-4106-94c9-49e6eb96fffa",
+          "cra7c_name": "JavaScript Concepts",
+          "cra7c_sectiontype": 793370000,
+          "cra7c_instructions": "Answer all multiple-choice questions about JavaScript fundamentals",
+          "cra7c_orderindex": 1,
+          "cra7c_timelimitminutes": 20,
+          "cra7c_mediaurl": null,
+          "cra7c_passagetext": null,
+          "cra7c_Exam@odata.bind": "/cra7c_exams(e9450f58-75f9-4d47-a55d-d2c533a0d674)"
+        },
+        {
+          "cra7c_sectionid": "f73d767f-99c2-46a0-a57c-1719e6c0e453",
+          "cra7c_name": "Array Methods",
+          "cra7c_sectiontype": 793370001,
+          "cra7c_instructions": "Explain array manipulation techniques in your own words",
+          "cra7c_orderindex": 2,
+          "cra7c_timelimitminutes": 15,
+          "cra7c_mediaurl": null,
+          "cra7c_passagetext": null,
+          "cra7c_Exam@odata.bind": "/cra7c_exams(e9450f58-75f9-4d47-a55d-d2c533a0d674)"
+        },
+        {
+          "cra7c_sectionid": "1e56d6b1-d638-416c-b59e-8315c51df289",
+          "cra7c_name": "Code Implementation",
+          "cra7c_sectiontype": 793370002,
+          "cra7c_instructions": "Write working JavaScript code to solve the given problems",
+          "cra7c_orderindex": 3,
+          "cra7c_timelimitminutes": 40,
+          "cra7c_mediaurl": null,
+          "cra7c_passagetext": null,
+          "cra7c_Exam@odata.bind": "/cra7c_exams(e9450f58-75f9-4d47-a55d-d2c533a0d674)"
+        },
+        {
+          "cra7c_sectionid": "54accbf4-99f1-495c-9da1-c9011152ace3",
+          "cra7c_name": "Listening Section",
+          "cra7c_sectiontype": 793370003,
+          "cra7c_instructions": "Listen to the audio recordings and answer the questions",
+          "cra7c_orderindex": 1,
+          "cra7c_timelimitminutes": 30,
+          "cra7c_mediaurl": "https://example.com/audio/ielts-listening-1",
+          "cra7c_passagetext": null,
+          "cra7c_Exam@odata.bind": "/cra7c_exams(caa91f27-cc6c-40d1-98ae-50d74c2a1305)"
+        },
+        {
+          "cra7c_sectionid": "9ec5e4a3-26d4-4cdb-92df-9b27c6cf0fae",
+          "cra7c_name": "Reading Comprehension",
+          "cra7c_sectiontype": 793370004,
+          "cra7c_instructions": "Read the passage carefully and answer the questions",
+          "cra7c_orderindex": 2,
+          "cra7c_timelimitminutes": 60,
+          "cra7c_mediaurl": null,
+          "cra7c_passagetext": "Climate change represents one of the most significant challenges facing humanity in the 21st century. Scientists have observed a consistent warming trend over the past several decades, with global temperatures rising at an unprecedented rate. This phenomenon is primarily attributed to increased concentrations of greenhouse gases in the atmosphere, particularly carbon dioxide from fossil fuel combustion.",
+          "cra7c_Exam@odata.bind": "/cra7c_exams(caa91f27-cc6c-40d1-98ae-50d74c2a1305)"
+        },
+        {
+          "cra7c_sectionid": "0e02ed2d-d81e-4018-b8e4-7e3929e5a90b",
+          "cra7c_name": "Writing Task",
+          "cra7c_sectiontype": 793370005,
+          "cra7c_instructions": "Write an essay of at least 250 words on the given topic",
+          "cra7c_orderindex": 3,
+          "cra7c_timelimitminutes": 40,
+          "cra7c_mediaurl": null,
+          "cra7c_passagetext": null,
+          "cra7c_Exam@odata.bind": "/cra7c_exams(caa91f27-cc6c-40d1-98ae-50d74c2a1305)"
+        },
+        {
+          "cra7c_sectionid": "f7086502-6a94-4d21-b93b-882c9495cdb6",
+          "cra7c_name": "Speaking Section",
+          "cra7c_sectiontype": 793370006,
+          "cra7c_instructions": "Record your spoken responses to the interview questions",
+          "cra7c_orderindex": 4,
+          "cra7c_timelimitminutes": 15,
+          "cra7c_mediaurl": null,
+          "cra7c_passagetext": null,
+          "cra7c_Exam@odata.bind": "/cra7c_exams(caa91f27-cc6c-40d1-98ae-50d74c2a1305)"
+        }
+      ],
+      "entity": {
+        "MetadataId": "4420839f-76d4-47be-beb4-6853150b9c6c",
+        "Attributes": [
+          {
+            "MetadataId": "f8230c65-5338-4456-84c1-5a5ea435314c",
+            "IsPrimaryName": true,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_Name",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Name",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "String",
+            "AttributeTypeName": {
+              "Value": "StringType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 850,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.StringAttributeMetadata"
+          },
+          {
+            "MetadataId": "e908674e-e796-44b6-bdb1-6fc66fa1d585",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_SectionType",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Section Type",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Picklist",
+            "AttributeTypeName": {
+              "Value": "PicklistType"
+            },
+            "DefaultFormValue": -1,
+            "OptionSet": {
+              "IsCustomOptionSet": true,
+              "IsGlobal": false,
+              "IsCustomizable": {
+                "Value": true,
+                "CanBeChanged": false,
+                "ManagedPropertyLogicalName": "iscustomizable"
+              },
+              "ExternalTypeName": "",
+              "OptionSetType": "Picklist",
+              "Description": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "DisplayName": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "Section Type",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "Options": [
+                {
+                  "Value": 793370000,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "MCQ",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370001,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "ShortText",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370002,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Code",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370003,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Listening",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370004,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Reading",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370005,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Writing",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370006,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Speaking",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370007,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Interview",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.PicklistAttributeMetadata"
+          },
+          {
+            "MetadataId": "bf58191a-5bf4-4dd4-9eff-9adf8c5d6139",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_Instructions",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Instructions",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "Memo",
+            "AttributeTypeName": {
+              "Value": "MemoType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 2000,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.MemoAttributeMetadata"
+          },
+          {
+            "MetadataId": "170a2ae8-5aab-4596-ae48-3aa46b59e0fb",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_OrderIndex",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Order Index",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Integer",
+            "AttributeTypeName": {
+              "Value": "IntegerType"
+            },
+            "MaxValue": 2147483647,
+            "MinValue": -2147483648,
+            "Format": "None",
+            "@odata.type": "Microsoft.Dynamics.CRM.IntegerAttributeMetadata"
+          },
+          {
+            "MetadataId": "2945f0f0-b313-4f55-a66d-8acfbb3be39c",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_TimeLimitMinutes",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Time Limit (Minutes)",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "Integer",
+            "AttributeTypeName": {
+              "Value": "IntegerType"
+            },
+            "MaxValue": 2147483647,
+            "MinValue": -2147483648,
+            "Format": "None",
+            "@odata.type": "Microsoft.Dynamics.CRM.IntegerAttributeMetadata"
+          },
+          {
+            "MetadataId": "0aafa97c-b98b-40c2-ac15-8109be019492",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_MediaURL",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Media URL",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "String",
+            "AttributeTypeName": {
+              "Value": "StringType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 100,
+            "FormatName": {
+              "Value": "Url"
+            },
+            "Format": "Url",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.StringAttributeMetadata"
+          },
+          {
+            "MetadataId": "e8439405-6469-4582-a58e-d19f87f18c87",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_PassageText",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Passage Text",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "Memo",
+            "AttributeTypeName": {
+              "Value": "MemoType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 2000,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.MemoAttributeMetadata"
+          },
+          {
+            "MetadataId": "bf1f0b81-d8c6-42c7-93db-3c8dd628913e",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_Exam",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Exam",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Lookup",
+            "AttributeTypeName": {
+              "Value": "LookupType"
+            },
+            "Targets": [
+              "cra7c_exam"
+            ],
+            "@odata.type": "Microsoft.Dynamics.CRM.LookupAttributeMetadata"
+          }
+        ],
+        "OwnershipType": "UserOwned",
+        "PrimaryNameAttribute": "cra7c_name",
+        "SchemaName": "cra7c_Section",
+        "HasNotes": false,
+        "HasActivities": false,
+        "IsAvailableOffline": false,
+        "IsActivity": false,
+        "ActivityTypeMask": 0,
+        "IsSolutionAware": false,
+        "Description": {
+          "LocalizedLabels": [
+            {
+              "Label": "Exam sections for organizing question types",
+              "LanguageCode": 1033
+            }
+          ]
+        },
+        "DisplayCollectionName": {
+          "LocalizedLabels": [
+            {
+              "Label": "Sections",
+              "LanguageCode": 1033
+            }
+          ]
+        },
+        "DisplayName": {
+          "LocalizedLabels": [
+            {
+              "Label": "Section",
+              "LanguageCode": 1033
+            }
+          ]
+        },
+        "IsAuditEnabled": {
+          "Value": false
+        },
+        "IsValidForQueue": {
+          "Value": false
+        },
+        "IsConnectionsEnabled": {
+          "Value": false
+        },
+        "IsDuplicateDetectionEnabled": {
+          "Value": true
+        },
+        "IsDocumentManagementEnabled": false,
+        "EntityColor": null,
+        "IsRetentionEnabled": false,
+        "SyncToExternalSearchIndex": false,
+        "AutoRouteToOwnerQueue": false,
+        "IsSLAEnabled": false,
+        "IsQuickCreateEnabled": false,
+        "IsActivityParty": false,
+        "HasFeedback": false,
+        "AutoCreateAccessTeams": false,
+        "ChangeTrackingEnabled": false,
+        "IsKnowledgeManagementEnabled": false,
+        "EntityHelpUrlEnabled": false,
+        "EntityHelpUrl": null,
+        "IsMailMergeEnabled": {
+          "Value": true
+        },
+        "IsOfflineInMobileClient": {
+          "Value": false
+        },
+        "ManyToOneRelationships": [
+          {
+            "MetadataId": "349b0146-e096-414d-bc00-9ac8636d7318",
+            "SchemaName": "cra7c_Section_cra7c_Exam_cra7c_Exam",
+            "ReferencingAttribute": "cra7c_exam",
+            "ReferencedEntity": "cra7c_exam",
+            "ReferencingEntity": "cra7c_section",
+            "ReferencedAttribute": "cra7c_examid",
+            "ReferencingEntityNavigationPropertyName": "cra7c_Exam",
+            "RelationshipType": "OneToManyRelationship",
+            "IsCustomRelationship": true,
+            "IsValidForAdvancedFind": true,
+            "IsCustomizable": {
+              "Value": true,
+              "CanBeChanged": true,
+              "ManagedPropertyLogicalName": "iscustomizable"
+            },
+            "CascadeConfiguration": {
+              "Assign": "NoCascade",
+              "Delete": "RemoveLink",
+              "Merge": "NoCascade",
+              "Reparent": "NoCascade",
+              "Share": "NoCascade",
+              "Unshare": "NoCascade",
+              "RollupView": "NoCascade",
+              "Archive": "RemoveLink"
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.OneToManyRelationshipMetadata"
+          }
+        ],
+        "@odata.type": "Microsoft.Dynamics.CRM.EntityMetadata"
+      },
+      "dataPayloadFormat": "Dataverse",
+      "tableSourceType": "DataModelProposal"
+    },
+    {
+      "data": [
+        {
+          "cra7c_questionid": "13d666fc-21e5-4d36-a1bb-5a75b2702c11",
+          "cra7c_questiontitle": "Variable Declaration",
+          "cra7c_questiontext": "Which keyword is used to declare a block-scoped variable in ES6?",
+          "cra7c_questiontype": 793370000,
+          "cra7c_optionsjson": "[\"var\", \"let\", \"const\", \"function\"]",
+          "cra7c_correctanswer": "let",
+          "cra7c_keywords": null,
+          "cra7c_points": 5,
+          "cra7c_orderindex": 1,
+          "cra7c_codelanguage": null,
+          "cra7c_Section@odata.bind": "/cra7c_sections(0959ae4e-9079-4106-94c9-49e6eb96fffa)"
+        },
+        {
+          "cra7c_questionid": "91766537-0fe3-4b5f-be75-f7b98d58e6eb",
+          "cra7c_questiontitle": "Spread Operator",
+          "cra7c_questiontext": "What does the spread operator (...) do in JavaScript?",
+          "cra7c_questiontype": 793370000,
+          "cra7c_optionsjson": "[\"Creates a new array\", \"Expands an array into individual elements\", \"Deletes array elements\", \"Sorts an array\"]",
+          "cra7c_correctanswer": "Expands an array into individual elements",
+          "cra7c_keywords": null,
+          "cra7c_points": 5,
+          "cra7c_orderindex": 2,
+          "cra7c_codelanguage": null,
+          "cra7c_Section@odata.bind": "/cra7c_sections(0959ae4e-9079-4106-94c9-49e6eb96fffa)"
+        },
+        {
+          "cra7c_questionid": "72207b63-9fee-432b-b6e2-27f37ef47528",
+          "cra7c_questiontitle": "Map vs ForEach",
+          "cra7c_questiontext": "Explain the difference between map() and forEach() array methods.",
+          "cra7c_questiontype": 793370001,
+          "cra7c_optionsjson": null,
+          "cra7c_correctanswer": null,
+          "cra7c_keywords": "map,forEach,return,transform,new array",
+          "cra7c_points": 10,
+          "cra7c_orderindex": 1,
+          "cra7c_codelanguage": null,
+          "cra7c_Section@odata.bind": "/cra7c_sections(f73d767f-99c2-46a0-a57c-1719e6c0e453)"
+        },
+        {
+          "cra7c_questionid": "52142b0e-3bd8-4091-8159-865744d770dd",
+          "cra7c_questiontitle": "Filter Method Usage",
+          "cra7c_questiontext": "Describe a use case for the filter() method with an example.",
+          "cra7c_questiontype": 793370001,
+          "cra7c_optionsjson": null,
+          "cra7c_correctanswer": null,
+          "cra7c_keywords": "filter,array,condition,subset,predicate",
+          "cra7c_points": 10,
+          "cra7c_orderindex": 2,
+          "cra7c_codelanguage": null,
+          "cra7c_Section@odata.bind": "/cra7c_sections(f73d767f-99c2-46a0-a57c-1719e6c0e453)"
+        },
+        {
+          "cra7c_questionid": "b98f59fa-2dca-452b-86a4-24b22317e02c",
+          "cra7c_questiontitle": "Filter Even Numbers",
+          "cra7c_questiontext": "Write a function that takes an array of numbers and returns only the even numbers using the filter method.",
+          "cra7c_questiontype": 793370002,
+          "cra7c_optionsjson": null,
+          "cra7c_correctanswer": "function filterEven(arr) { return arr.filter(num => num % 2 === 0); }",
+          "cra7c_keywords": null,
+          "cra7c_points": 15,
+          "cra7c_orderindex": 1,
+          "cra7c_codelanguage": "javascript",
+          "cra7c_Section@odata.bind": "/cra7c_sections(1e56d6b1-d638-416c-b59e-8315c51df289)"
+        },
+        {
+          "cra7c_questionid": "c92490e3-df74-4dc7-adff-83959c5c3ee8",
+          "cra7c_questiontitle": "Reduce Sum",
+          "cra7c_questiontext": "Create a function that uses the reduce method to calculate the sum of all numbers in an array.",
+          "cra7c_questiontype": 793370002,
+          "cra7c_optionsjson": null,
+          "cra7c_correctanswer": "function sumArray(arr) { return arr.reduce((acc, num) => acc + num, 0); }",
+          "cra7c_keywords": null,
+          "cra7c_points": 15,
+          "cra7c_orderindex": 2,
+          "cra7c_codelanguage": "javascript",
+          "cra7c_Section@odata.bind": "/cra7c_sections(1e56d6b1-d638-416c-b59e-8315c51df289)"
+        },
+        {
+          "cra7c_questionid": "1b308477-575e-49b5-b69d-c69961544aaa",
+          "cra7c_questiontitle": "Conversation Topic",
+          "cra7c_questiontext": "What is the main topic of the conversation?",
+          "cra7c_questiontype": 793370003,
+          "cra7c_optionsjson": "[\"Job interview\", \"University application\", \"Travel plans\", \"Restaurant reservation\"]",
+          "cra7c_correctanswer": "University application",
+          "cra7c_keywords": null,
+          "cra7c_points": 5,
+          "cra7c_orderindex": 1,
+          "cra7c_codelanguage": null,
+          "cra7c_Section@odata.bind": "/cra7c_sections(54accbf4-99f1-495c-9da1-c9011152ace3)"
+        },
+        {
+          "cra7c_questionid": "b41c87ef-e96e-49cd-8456-79670c6612d4",
+          "cra7c_questiontitle": "Application Deadline",
+          "cra7c_questiontext": "When does the speaker plan to submit the application?",
+          "cra7c_questiontype": 793370003,
+          "cra7c_optionsjson": "[\"Next Monday\", \"By Friday\", \"Tomorrow\", \"Next month\"]",
+          "cra7c_correctanswer": "By Friday",
+          "cra7c_keywords": null,
+          "cra7c_points": 5,
+          "cra7c_orderindex": 2,
+          "cra7c_codelanguage": null,
+          "cra7c_Section@odata.bind": "/cra7c_sections(54accbf4-99f1-495c-9da1-c9011152ace3)"
+        },
+        {
+          "cra7c_questionid": "afb6ca27-d8d8-4ad1-b054-92a2e6a24fa1",
+          "cra7c_questiontitle": "Climate Cause",
+          "cra7c_questiontext": "According to the passage, what is the primary cause of climate change?",
+          "cra7c_questiontype": 793370004,
+          "cra7c_optionsjson": "[\"Natural weather cycles\", \"Solar radiation\", \"Greenhouse gas emissions\", \"Ocean currents\"]",
+          "cra7c_correctanswer": "Greenhouse gas emissions",
+          "cra7c_keywords": null,
+          "cra7c_points": 5,
+          "cra7c_orderindex": 1,
+          "cra7c_codelanguage": null,
+          "cra7c_Section@odata.bind": "/cra7c_sections(9ec5e4a3-26d4-4cdb-92df-9b27c6cf0fae)"
+        },
+        {
+          "cra7c_questionid": "a684f536-13a6-4a55-98e4-a9650004cff5",
+          "cra7c_questiontitle": "Temperature Trend",
+          "cra7c_questiontext": "What does the author suggest about the rate of temperature increase?",
+          "cra7c_questiontype": 793370004,
+          "cra7c_optionsjson": "[\"It is slowing down\", \"It is unprecedented\", \"It is cyclical\", \"It is uncertain\"]",
+          "cra7c_correctanswer": "It is unprecedented",
+          "cra7c_keywords": null,
+          "cra7c_points": 5,
+          "cra7c_orderindex": 2,
+          "cra7c_codelanguage": null,
+          "cra7c_Section@odata.bind": "/cra7c_sections(9ec5e4a3-26d4-4cdb-92df-9b27c6cf0fae)"
+        },
+        {
+          "cra7c_questionid": "6e68deac-05d2-4756-ab53-af5e5c5a4bd2",
+          "cra7c_questiontitle": "Technology Essay",
+          "cra7c_questiontext": "Some people believe that technology has made our lives more complicated rather than simpler. To what extent do you agree or disagree?",
+          "cra7c_questiontype": 793370005,
+          "cra7c_optionsjson": null,
+          "cra7c_correctanswer": null,
+          "cra7c_keywords": "technology,complexity,simplicity,modern life,argument,examples",
+          "cra7c_points": 20,
+          "cra7c_orderindex": 1,
+          "cra7c_codelanguage": null,
+          "cra7c_Section@odata.bind": "/cra7c_sections(0e02ed2d-d81e-4018-b8e4-7e3929e5a90b)"
+        },
+        {
+          "cra7c_questionid": "1ace173a-4a0b-44d0-a05e-d90848cd7c1f",
+          "cra7c_questiontitle": "Childhood Memory",
+          "cra7c_questiontext": "Describe a memorable event from your childhood. Why was it significant to you?",
+          "cra7c_questiontype": 793370006,
+          "cra7c_optionsjson": null,
+          "cra7c_correctanswer": null,
+          "cra7c_keywords": "childhood,memory,personal experience,emotions,details",
+          "cra7c_points": 10,
+          "cra7c_orderindex": 1,
+          "cra7c_codelanguage": null,
+          "cra7c_Section@odata.bind": "/cra7c_sections(f7086502-6a94-4d21-b93b-882c9495cdb6)"
+        },
+        {
+          "cra7c_questionid": "ec4ec072-4a23-4ff1-898a-e225f5161df0",
+          "cra7c_questiontitle": "Social Media Discussion",
+          "cra7c_questiontext": "What are the advantages and disadvantages of social media in modern society?",
+          "cra7c_questiontype": 793370006,
+          "cra7c_optionsjson": null,
+          "cra7c_correctanswer": null,
+          "cra7c_keywords": "social media,advantages,disadvantages,society,communication",
+          "cra7c_points": 10,
+          "cra7c_orderindex": 2,
+          "cra7c_codelanguage": null,
+          "cra7c_Section@odata.bind": "/cra7c_sections(f7086502-6a94-4d21-b93b-882c9495cdb6)"
+        }
+      ],
+      "entity": {
+        "MetadataId": "392f2465-ca75-4894-bbfc-0fac144b366d",
+        "Attributes": [
+          {
+            "MetadataId": "ddcb3e6a-208f-4ae2-a897-5ebc2d7c65be",
+            "IsPrimaryName": true,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_QuestionTitle",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Question Title",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "String",
+            "AttributeTypeName": {
+              "Value": "StringType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 850,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.StringAttributeMetadata"
+          },
+          {
+            "MetadataId": "2faeea02-c1fa-4a20-b3dc-77bca70fab56",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_QuestionText",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Question Text",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Memo",
+            "AttributeTypeName": {
+              "Value": "MemoType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 2000,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.MemoAttributeMetadata"
+          },
+          {
+            "MetadataId": "713ad8d3-5590-411c-a35b-188d5cf4a1be",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_QuestionType",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Question Type",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Picklist",
+            "AttributeTypeName": {
+              "Value": "PicklistType"
+            },
+            "DefaultFormValue": -1,
+            "OptionSet": {
+              "IsCustomOptionSet": true,
+              "IsGlobal": false,
+              "IsCustomizable": {
+                "Value": true,
+                "CanBeChanged": false,
+                "ManagedPropertyLogicalName": "iscustomizable"
+              },
+              "ExternalTypeName": "",
+              "OptionSetType": "Picklist",
+              "Description": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "DisplayName": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "Question Type",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "Options": [
+                {
+                  "Value": 793370000,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "MCQ",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370001,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "ShortText",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370002,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Code",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370003,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Listening",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370004,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Reading",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370005,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Writing",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370006,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Speaking",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370007,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Interview",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.PicklistAttributeMetadata"
+          },
+          {
+            "MetadataId": "18a6b2e9-8080-4f5d-b403-9933538d989e",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_OptionsJSON",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Options (JSON)",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "Memo",
+            "AttributeTypeName": {
+              "Value": "MemoType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 2000,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.MemoAttributeMetadata"
+          },
+          {
+            "MetadataId": "0608a914-8e55-44fb-bd14-96fb1b82ac5c",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_CorrectAnswer",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Correct Answer",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "Memo",
+            "AttributeTypeName": {
+              "Value": "MemoType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 2000,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.MemoAttributeMetadata"
+          },
+          {
+            "MetadataId": "dc858161-e227-48a8-ba92-893c66b7c8b6",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_Keywords",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Keywords",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "Memo",
+            "AttributeTypeName": {
+              "Value": "MemoType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 2000,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.MemoAttributeMetadata"
+          },
+          {
+            "MetadataId": "30d92488-6ff0-41e8-b45f-0556f586e798",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_Points",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Points",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Integer",
+            "AttributeTypeName": {
+              "Value": "IntegerType"
+            },
+            "MaxValue": 2147483647,
+            "MinValue": -2147483648,
+            "Format": "None",
+            "@odata.type": "Microsoft.Dynamics.CRM.IntegerAttributeMetadata"
+          },
+          {
+            "MetadataId": "5d67a2c8-de62-40fc-a173-15b47c483cf7",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_OrderIndex",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Order Index",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Integer",
+            "AttributeTypeName": {
+              "Value": "IntegerType"
+            },
+            "MaxValue": 2147483647,
+            "MinValue": -2147483648,
+            "Format": "None",
+            "@odata.type": "Microsoft.Dynamics.CRM.IntegerAttributeMetadata"
+          },
+          {
+            "MetadataId": "43210818-479e-434f-804f-d1a452828444",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_CodeLanguage",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Code Language",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "String",
+            "AttributeTypeName": {
+              "Value": "StringType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 100,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.StringAttributeMetadata"
+          },
+          {
+            "MetadataId": "e4aa8932-acd4-458a-9cab-74ce372c9cdc",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_Section",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Section",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Lookup",
+            "AttributeTypeName": {
+              "Value": "LookupType"
+            },
+            "Targets": [
+              "cra7c_section"
+            ],
+            "@odata.type": "Microsoft.Dynamics.CRM.LookupAttributeMetadata"
+          }
+        ],
+        "OwnershipType": "UserOwned",
+        "PrimaryNameAttribute": "cra7c_questiontitle",
+        "SchemaName": "cra7c_Question",
+        "HasNotes": false,
+        "HasActivities": false,
+        "IsAvailableOffline": false,
+        "IsActivity": false,
+        "ActivityTypeMask": 0,
+        "IsSolutionAware": false,
+        "Description": {
+          "LocalizedLabels": [
+            {
+              "Label": "Individual exam questions",
+              "LanguageCode": 1033
+            }
+          ]
+        },
+        "DisplayCollectionName": {
+          "LocalizedLabels": [
+            {
+              "Label": "Questions",
+              "LanguageCode": 1033
+            }
+          ]
+        },
+        "DisplayName": {
+          "LocalizedLabels": [
+            {
+              "Label": "Question",
+              "LanguageCode": 1033
+            }
+          ]
+        },
+        "IsAuditEnabled": {
+          "Value": false
+        },
+        "IsValidForQueue": {
+          "Value": false
+        },
+        "IsConnectionsEnabled": {
+          "Value": false
+        },
+        "IsDuplicateDetectionEnabled": {
+          "Value": true
+        },
+        "IsDocumentManagementEnabled": false,
+        "EntityColor": null,
+        "IsRetentionEnabled": false,
+        "SyncToExternalSearchIndex": false,
+        "AutoRouteToOwnerQueue": false,
+        "IsSLAEnabled": false,
+        "IsQuickCreateEnabled": false,
+        "IsActivityParty": false,
+        "HasFeedback": false,
+        "AutoCreateAccessTeams": false,
+        "ChangeTrackingEnabled": false,
+        "IsKnowledgeManagementEnabled": false,
+        "EntityHelpUrlEnabled": false,
+        "EntityHelpUrl": null,
+        "IsMailMergeEnabled": {
+          "Value": true
+        },
+        "IsOfflineInMobileClient": {
+          "Value": false
+        },
+        "ManyToOneRelationships": [
+          {
+            "MetadataId": "cfd18a7c-5a39-4c90-ad53-71d133e72152",
+            "SchemaName": "cra7c_Question_cra7c_Section_cra7c_Section",
+            "ReferencingAttribute": "cra7c_section",
+            "ReferencedEntity": "cra7c_section",
+            "ReferencingEntity": "cra7c_question",
+            "ReferencedAttribute": "cra7c_sectionid",
+            "ReferencingEntityNavigationPropertyName": "cra7c_Section",
+            "RelationshipType": "OneToManyRelationship",
+            "IsCustomRelationship": true,
+            "IsValidForAdvancedFind": true,
+            "IsCustomizable": {
+              "Value": true,
+              "CanBeChanged": true,
+              "ManagedPropertyLogicalName": "iscustomizable"
+            },
+            "CascadeConfiguration": {
+              "Assign": "NoCascade",
+              "Delete": "RemoveLink",
+              "Merge": "NoCascade",
+              "Reparent": "NoCascade",
+              "Share": "NoCascade",
+              "Unshare": "NoCascade",
+              "RollupView": "NoCascade",
+              "Archive": "RemoveLink"
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.OneToManyRelationshipMetadata"
+          }
+        ],
+        "@odata.type": "Microsoft.Dynamics.CRM.EntityMetadata"
+      },
+      "dataPayloadFormat": "Dataverse",
+      "tableSourceType": "DataModelProposal"
+    },
+    {
+      "data": [
+        {
+          "cra7c_attemptid": "56a010fc-f37a-4ee9-b4bc-cc63fbebf174",
+          "cra7c_studentname": "Emma Johnson",
+          "cra7c_studentid": "student_101",
+          "cra7c_studentemail": "emma.johnson@university.edu",
+          "cra7c_Exam@odata.bind": "/cra7c_exams(e9450f58-75f9-4d47-a55d-d2c533a0d674)",
+          "cra7c_startedat": "2026-05-04T10:00:00.000Z",
+          "cra7c_submittedat": "2026-05-04T11:25:00.000Z",
+          "cra7c_status": 793370004,
+          "cra7c_violationcount": 0,
+          "cra7c_autoscore": 25,
+          "cra7c_manualscore": 35,
+          "cra7c_totalscore": 60,
+          "cra7c_totalpossible": 70
+        },
+        {
+          "cra7c_attemptid": "9824003f-fb7b-4de6-89b0-2fd5a97bf94f",
+          "cra7c_studentname": "Michael Chen",
+          "cra7c_studentid": "student_102",
+          "cra7c_studentemail": "michael.chen@university.edu",
+          "cra7c_Exam@odata.bind": "/cra7c_exams(e9450f58-75f9-4d47-a55d-d2c533a0d674)",
+          "cra7c_startedat": "2026-05-04T14:00:00.000Z",
+          "cra7c_submittedat": "2026-05-04T15:30:00.000Z",
+          "cra7c_status": 793370004,
+          "cra7c_violationcount": 1,
+          "cra7c_autoscore": 30,
+          "cra7c_manualscore": 38,
+          "cra7c_totalscore": 68,
+          "cra7c_totalpossible": 70
+        },
+        {
+          "cra7c_attemptid": "0128af92-7d06-4e94-a22f-8989eb8c8abc",
+          "cra7c_studentname": "Sarah Williams",
+          "cra7c_studentid": "student_103",
+          "cra7c_studentemail": "sarah.williams@university.edu",
+          "cra7c_Exam@odata.bind": "/cra7c_exams(caa91f27-cc6c-40d1-98ae-50d74c2a1305)",
+          "cra7c_startedat": "2026-05-05T09:00:00.000Z",
+          "cra7c_submittedat": "2026-05-05T12:00:00.000Z",
+          "cra7c_status": 793370003,
+          "cra7c_violationcount": 0,
+          "cra7c_autoscore": 20,
+          "cra7c_manualscore": null,
+          "cra7c_totalscore": null,
+          "cra7c_totalpossible": 60
+        },
+        {
+          "cra7c_attemptid": "433fc24c-4d73-4773-abd6-3d8a8bb47055",
+          "cra7c_studentname": "David Martinez",
+          "cra7c_studentid": "student_104",
+          "cra7c_studentemail": "david.martinez@university.edu",
+          "cra7c_Exam@odata.bind": "/cra7c_exams(caa91f27-cc6c-40d1-98ae-50d74c2a1305)",
+          "cra7c_startedat": "2026-05-05T13:00:00.000Z",
+          "cra7c_submittedat": "2026-05-05T16:00:00.000Z",
+          "cra7c_status": 793370004,
+          "cra7c_violationcount": 0,
+          "cra7c_autoscore": 25,
+          "cra7c_manualscore": 28,
+          "cra7c_totalscore": 53,
+          "cra7c_totalpossible": 60
+        },
+        {
+          "cra7c_attemptid": "4903d6c8-7020-46c2-ae09-3e73b95716d3",
+          "cra7c_studentname": "Jennifer Taylor",
+          "cra7c_studentid": "student_105",
+          "cra7c_studentemail": "jennifer.taylor@university.edu",
+          "cra7c_Exam@odata.bind": "/cra7c_exams(e9450f58-75f9-4d47-a55d-d2c533a0d674)",
+          "cra7c_startedat": "2026-05-06T11:00:00.000Z",
+          "cra7c_submittedat": null,
+          "cra7c_status": 793370000,
+          "cra7c_violationcount": 2,
+          "cra7c_autoscore": null,
+          "cra7c_manualscore": null,
+          "cra7c_totalscore": null,
+          "cra7c_totalpossible": 70
+        }
+      ],
+      "entity": {
+        "MetadataId": "ec6a7869-1da1-4b0b-9af0-52ae81b4a9f0",
+        "Attributes": [
+          {
+            "MetadataId": "68c96631-fdb4-4b5a-8a72-2cbe305fb85a",
+            "IsPrimaryName": true,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_StudentName",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Student Name",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "String",
+            "AttributeTypeName": {
+              "Value": "StringType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 850,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.StringAttributeMetadata"
+          },
+          {
+            "MetadataId": "89e43313-d598-40da-8a5f-6d587ed883a9",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_StudentID",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Student ID",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "String",
+            "AttributeTypeName": {
+              "Value": "StringType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 100,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.StringAttributeMetadata"
+          },
+          {
+            "MetadataId": "4abedc62-0420-4401-9919-3296c43a38dd",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_StudentEmail",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Student Email",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "String",
+            "AttributeTypeName": {
+              "Value": "StringType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 100,
+            "FormatName": {
+              "Value": "Email"
+            },
+            "Format": "Email",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.StringAttributeMetadata"
+          },
+          {
+            "MetadataId": "3e531c9a-4dfd-43e4-a1b3-d6ae6ed5666e",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_Exam",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Exam",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Lookup",
+            "AttributeTypeName": {
+              "Value": "LookupType"
+            },
+            "Targets": [
+              "cra7c_exam"
+            ],
+            "@odata.type": "Microsoft.Dynamics.CRM.LookupAttributeMetadata"
+          },
+          {
+            "MetadataId": "a59f877b-d80f-4c49-ab93-9ae5870c8248",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_StartedAt",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Started At",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "ImeMode": "Auto",
+            "AttributeType": "DateTime",
+            "AttributeTypeName": {
+              "Value": "DateTimeType"
+            },
+            "Format": "DateAndTime",
+            "DateTimeBehavior": {
+              "Value": "UserLocal"
+            },
+            "CanChangeDateTimeBehavior": {
+              "Value": true,
+              "CanBeChanged": true,
+              "ManagedPropertyLogicalName": "canmodifybehavior"
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.DateTimeAttributeMetadata"
+          },
+          {
+            "MetadataId": "c399bae7-a614-401f-a47b-9b76e29a13bc",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_SubmittedAt",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Submitted At",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "ImeMode": "Auto",
+            "AttributeType": "DateTime",
+            "AttributeTypeName": {
+              "Value": "DateTimeType"
+            },
+            "Format": "DateAndTime",
+            "DateTimeBehavior": {
+              "Value": "UserLocal"
+            },
+            "CanChangeDateTimeBehavior": {
+              "Value": true,
+              "CanBeChanged": true,
+              "ManagedPropertyLogicalName": "canmodifybehavior"
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.DateTimeAttributeMetadata"
+          },
+          {
+            "MetadataId": "f0ec21cb-cd5e-4a42-a1ae-2da11acb9968",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_Status",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Status",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Picklist",
+            "AttributeTypeName": {
+              "Value": "PicklistType"
+            },
+            "DefaultFormValue": -1,
+            "OptionSet": {
+              "IsCustomOptionSet": true,
+              "IsGlobal": false,
+              "IsCustomizable": {
+                "Value": true,
+                "CanBeChanged": false,
+                "ManagedPropertyLogicalName": "iscustomizable"
+              },
+              "ExternalTypeName": "",
+              "OptionSetType": "Picklist",
+              "Description": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "DisplayName": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "Status",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "Options": [
+                {
+                  "Value": 793370000,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "InProgress",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370001,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Submitted",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370002,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "AutoCancelled",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370003,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "GradingPending",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370004,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Completed",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.PicklistAttributeMetadata"
+          },
+          {
+            "MetadataId": "cdf41827-6a13-4dc4-8457-1dc61a6dbadc",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_ViolationCount",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Violation Count",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Integer",
+            "AttributeTypeName": {
+              "Value": "IntegerType"
+            },
+            "MaxValue": 2147483647,
+            "MinValue": -2147483648,
+            "Format": "None",
+            "@odata.type": "Microsoft.Dynamics.CRM.IntegerAttributeMetadata"
+          },
+          {
+            "MetadataId": "cd486284-a54d-4bb1-9de7-33776a816c09",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_AutoScore",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Auto Score",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "Decimal",
+            "AttributeTypeName": {
+              "Value": "DecimalType"
+            },
+            "ImeMode": "Auto",
+            "MaxValue": 100000000000,
+            "MinValue": -100000000000,
+            "Precision": 2,
+            "@odata.type": "Microsoft.Dynamics.CRM.DecimalAttributeMetadata"
+          },
+          {
+            "MetadataId": "fc7a37bb-c542-4f23-aa1b-ea47bfa10291",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_ManualScore",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Manual Score",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "Decimal",
+            "AttributeTypeName": {
+              "Value": "DecimalType"
+            },
+            "ImeMode": "Auto",
+            "MaxValue": 100000000000,
+            "MinValue": -100000000000,
+            "Precision": 2,
+            "@odata.type": "Microsoft.Dynamics.CRM.DecimalAttributeMetadata"
+          },
+          {
+            "MetadataId": "8f49a30d-a945-432f-9f30-34ce580aa71a",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_TotalScore",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Total Score",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "Decimal",
+            "AttributeTypeName": {
+              "Value": "DecimalType"
+            },
+            "ImeMode": "Auto",
+            "MaxValue": 100000000000,
+            "MinValue": -100000000000,
+            "Precision": 2,
+            "@odata.type": "Microsoft.Dynamics.CRM.DecimalAttributeMetadata"
+          },
+          {
+            "MetadataId": "8cc08d74-0a40-4d35-91ea-b8dd9da5dfe9",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_TotalPossible",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Total Possible",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Integer",
+            "AttributeTypeName": {
+              "Value": "IntegerType"
+            },
+            "MaxValue": 2147483647,
+            "MinValue": -2147483648,
+            "Format": "None",
+            "@odata.type": "Microsoft.Dynamics.CRM.IntegerAttributeMetadata"
+          }
+        ],
+        "OwnershipType": "UserOwned",
+        "PrimaryNameAttribute": "cra7c_studentname",
+        "SchemaName": "cra7c_Attempt",
+        "HasNotes": false,
+        "HasActivities": false,
+        "IsAvailableOffline": false,
+        "IsActivity": false,
+        "ActivityTypeMask": 0,
+        "IsSolutionAware": false,
+        "Description": {
+          "LocalizedLabels": [
+            {
+              "Label": "Student exam attempts",
+              "LanguageCode": 1033
+            }
+          ]
+        },
+        "DisplayCollectionName": {
+          "LocalizedLabels": [
+            {
+              "Label": "Attempts",
+              "LanguageCode": 1033
+            }
+          ]
+        },
+        "DisplayName": {
+          "LocalizedLabels": [
+            {
+              "Label": "Attempt",
+              "LanguageCode": 1033
+            }
+          ]
+        },
+        "IsAuditEnabled": {
+          "Value": false
+        },
+        "IsValidForQueue": {
+          "Value": false
+        },
+        "IsConnectionsEnabled": {
+          "Value": false
+        },
+        "IsDuplicateDetectionEnabled": {
+          "Value": true
+        },
+        "IsDocumentManagementEnabled": false,
+        "EntityColor": null,
+        "IsRetentionEnabled": false,
+        "SyncToExternalSearchIndex": false,
+        "AutoRouteToOwnerQueue": false,
+        "IsSLAEnabled": false,
+        "IsQuickCreateEnabled": false,
+        "IsActivityParty": false,
+        "HasFeedback": false,
+        "AutoCreateAccessTeams": false,
+        "ChangeTrackingEnabled": false,
+        "IsKnowledgeManagementEnabled": false,
+        "EntityHelpUrlEnabled": false,
+        "EntityHelpUrl": null,
+        "IsMailMergeEnabled": {
+          "Value": true
+        },
+        "IsOfflineInMobileClient": {
+          "Value": false
+        },
+        "ManyToOneRelationships": [
+          {
+            "MetadataId": "2bf8b7ac-d1cb-4f3c-b6d0-bf37d97b477d",
+            "SchemaName": "cra7c_Attempt_cra7c_Exam_cra7c_Exam",
+            "ReferencingAttribute": "cra7c_exam",
+            "ReferencedEntity": "cra7c_exam",
+            "ReferencingEntity": "cra7c_attempt",
+            "ReferencedAttribute": "cra7c_examid",
+            "ReferencingEntityNavigationPropertyName": "cra7c_Exam",
+            "RelationshipType": "OneToManyRelationship",
+            "IsCustomRelationship": true,
+            "IsValidForAdvancedFind": true,
+            "IsCustomizable": {
+              "Value": true,
+              "CanBeChanged": true,
+              "ManagedPropertyLogicalName": "iscustomizable"
+            },
+            "CascadeConfiguration": {
+              "Assign": "NoCascade",
+              "Delete": "RemoveLink",
+              "Merge": "NoCascade",
+              "Reparent": "NoCascade",
+              "Share": "NoCascade",
+              "Unshare": "NoCascade",
+              "RollupView": "NoCascade",
+              "Archive": "RemoveLink"
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.OneToManyRelationshipMetadata"
+          }
+        ],
+        "@odata.type": "Microsoft.Dynamics.CRM.EntityMetadata"
+      },
+      "dataPayloadFormat": "Dataverse",
+      "tableSourceType": "DataModelProposal"
+    },
+    {
+      "data": [
+        {
+          "cra7c_responseid": "87fd9ec1-ae0c-4007-ad0a-fe3ff3ecfac6",
+          "cra7c_responsesummary": "let",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(56a010fc-f37a-4ee9-b4bc-cc63fbebf174)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(13d666fc-21e5-4d36-a1bb-5a75b2702c11)",
+          "cra7c_answertext": "let",
+          "cra7c_audiourl": null,
+          "cra7c_pointsearned": 5,
+          "cra7c_iscorrect": true,
+          "cra7c_gradingstatus": 793370001,
+          "cra7c_graderfeedback": null
+        },
+        {
+          "cra7c_responseid": "396f7d47-b1b2-46e0-b9ae-015300db9cf4",
+          "cra7c_responsesummary": "Expands an array into individual elements",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(56a010fc-f37a-4ee9-b4bc-cc63fbebf174)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(91766537-0fe3-4b5f-be75-f7b98d58e6eb)",
+          "cra7c_answertext": "Expands an array into individual elements",
+          "cra7c_audiourl": null,
+          "cra7c_pointsearned": 5,
+          "cra7c_iscorrect": true,
+          "cra7c_gradingstatus": 793370001,
+          "cra7c_graderfeedback": null
+        },
+        {
+          "cra7c_responseid": "bc3f3046-d382-4518-8bed-fedc4083f694",
+          "cra7c_responsesummary": "map() creates a new array...",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(56a010fc-f37a-4ee9-b4bc-cc63fbebf174)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(72207b63-9fee-432b-b6e2-27f37ef47528)",
+          "cra7c_answertext": "map() creates a new array with transformed values and returns it, while forEach() just iterates without returning anything",
+          "cra7c_audiourl": null,
+          "cra7c_pointsearned": 8,
+          "cra7c_iscorrect": null,
+          "cra7c_gradingstatus": 793370002,
+          "cra7c_graderfeedback": "Good explanation, mentioned key differences"
+        },
+        {
+          "cra7c_responseid": "64d1711c-3ace-4154-bf44-b344129109e4",
+          "cra7c_responsesummary": "function filterEven(arr)...",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(56a010fc-f37a-4ee9-b4bc-cc63fbebf174)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(b98f59fa-2dca-452b-86a4-24b22317e02c)",
+          "cra7c_answertext": "function filterEven(arr) { return arr.filter(num => num % 2 === 0); }",
+          "cra7c_audiourl": null,
+          "cra7c_pointsearned": 15,
+          "cra7c_iscorrect": true,
+          "cra7c_gradingstatus": 793370001,
+          "cra7c_graderfeedback": null
+        },
+        {
+          "cra7c_responseid": "f3ea8330-0015-4603-8a58-0b9cc53cc190",
+          "cra7c_responsesummary": "function sumArray(arr)...",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(56a010fc-f37a-4ee9-b4bc-cc63fbebf174)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(c92490e3-df74-4dc7-adff-83959c5c3ee8)",
+          "cra7c_answertext": "function sumArray(arr) { let sum = 0; for(let i=0; i<arr.length; i++) { sum += arr[i]; } return sum; }",
+          "cra7c_audiourl": null,
+          "cra7c_pointsearned": 7,
+          "cra7c_iscorrect": false,
+          "cra7c_gradingstatus": 793370002,
+          "cra7c_graderfeedback": "Works but doesn't use reduce as requested"
+        },
+        {
+          "cra7c_responseid": "303061cc-dbb3-477d-a4f5-fed04e380696",
+          "cra7c_responsesummary": "let",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(9824003f-fb7b-4de6-89b0-2fd5a97bf94f)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(13d666fc-21e5-4d36-a1bb-5a75b2702c11)",
+          "cra7c_answertext": "let",
+          "cra7c_audiourl": null,
+          "cra7c_pointsearned": 5,
+          "cra7c_iscorrect": true,
+          "cra7c_gradingstatus": 793370001,
+          "cra7c_graderfeedback": null
+        },
+        {
+          "cra7c_responseid": "101695e6-792b-4387-a5ea-617a250552e2",
+          "cra7c_responsesummary": "Creates a new array",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(9824003f-fb7b-4de6-89b0-2fd5a97bf94f)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(91766537-0fe3-4b5f-be75-f7b98d58e6eb)",
+          "cra7c_answertext": "Creates a new array",
+          "cra7c_audiourl": null,
+          "cra7c_pointsearned": 0,
+          "cra7c_iscorrect": false,
+          "cra7c_gradingstatus": 793370001,
+          "cra7c_graderfeedback": null
+        },
+        {
+          "cra7c_responseid": "5a24465c-7ec8-4ea3-a46a-05d07d25952b",
+          "cra7c_responsesummary": "map returns new array...",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(9824003f-fb7b-4de6-89b0-2fd5a97bf94f)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(72207b63-9fee-432b-b6e2-27f37ef47528)",
+          "cra7c_answertext": "map returns new array, forEach doesn't return",
+          "cra7c_audiourl": null,
+          "cra7c_pointsearned": 6,
+          "cra7c_iscorrect": null,
+          "cra7c_gradingstatus": 793370002,
+          "cra7c_graderfeedback": "Correct but brief, could provide more detail"
+        },
+        {
+          "cra7c_responseid": "b1645ed5-ab06-46ce-af10-be3797a381d6",
+          "cra7c_responsesummary": "const filterEven = (arr)...",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(9824003f-fb7b-4de6-89b0-2fd5a97bf94f)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(b98f59fa-2dca-452b-86a4-24b22317e02c)",
+          "cra7c_answertext": "const filterEven = (arr) => arr.filter(x => x % 2 == 0);",
+          "cra7c_audiourl": null,
+          "cra7c_pointsearned": 15,
+          "cra7c_iscorrect": true,
+          "cra7c_gradingstatus": 793370001,
+          "cra7c_graderfeedback": null
+        },
+        {
+          "cra7c_responseid": "66479d3d-db5c-4344-809b-9f9b7cdd8b08",
+          "cra7c_responsesummary": "function sumArray(arr)...",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(9824003f-fb7b-4de6-89b0-2fd5a97bf94f)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(c92490e3-df74-4dc7-adff-83959c5c3ee8)",
+          "cra7c_answertext": "function sumArray(arr) { return arr.reduce((total, current) => total + current, 0); }",
+          "cra7c_audiourl": null,
+          "cra7c_pointsearned": 15,
+          "cra7c_iscorrect": true,
+          "cra7c_gradingstatus": 793370001,
+          "cra7c_graderfeedback": null
+        },
+        {
+          "cra7c_responseid": "bb1d7a20-6767-4eaf-9b66-d1260011e388",
+          "cra7c_responsesummary": "University application",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(0128af92-7d06-4e94-a22f-8989eb8c8abc)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(1b308477-575e-49b5-b69d-c69961544aaa)",
+          "cra7c_answertext": "University application",
+          "cra7c_audiourl": null,
+          "cra7c_pointsearned": 5,
+          "cra7c_iscorrect": true,
+          "cra7c_gradingstatus": 793370001,
+          "cra7c_graderfeedback": null
+        },
+        {
+          "cra7c_responseid": "1fe0d116-93df-4dec-9533-c93e56d91e6a",
+          "cra7c_responsesummary": "Greenhouse gas emissions",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(0128af92-7d06-4e94-a22f-8989eb8c8abc)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(afb6ca27-d8d8-4ad1-b054-92a2e6a24fa1)",
+          "cra7c_answertext": "Greenhouse gas emissions",
+          "cra7c_audiourl": null,
+          "cra7c_pointsearned": 5,
+          "cra7c_iscorrect": true,
+          "cra7c_gradingstatus": 793370001,
+          "cra7c_graderfeedback": null
+        },
+        {
+          "cra7c_responseid": "c0d7cb10-e6e0-4753-82e4-c262983e27b9",
+          "cra7c_responsesummary": "Technology has both simplified...",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(0128af92-7d06-4e94-a22f-8989eb8c8abc)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(6e68deac-05d2-4756-ab53-af5e5c5a4bd2)",
+          "cra7c_answertext": "Technology has both simplified and complicated our lives. While smartphones connect us instantly, they also create constant distractions...",
+          "cra7c_audiourl": null,
+          "cra7c_pointsearned": null,
+          "cra7c_iscorrect": null,
+          "cra7c_gradingstatus": 793370000,
+          "cra7c_graderfeedback": null
+        },
+        {
+          "cra7c_responseid": "71617ee0-7044-4ffe-bbe9-eb563e11cc5c",
+          "cra7c_responsesummary": "University application",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(433fc24c-4d73-4773-abd6-3d8a8bb47055)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(1b308477-575e-49b5-b69d-c69961544aaa)",
+          "cra7c_answertext": "University application",
+          "cra7c_audiourl": null,
+          "cra7c_pointsearned": 5,
+          "cra7c_iscorrect": true,
+          "cra7c_gradingstatus": 793370001,
+          "cra7c_graderfeedback": null
+        },
+        {
+          "cra7c_responseid": "49eb71bc-b60c-4e84-a37a-4a4c734a1909",
+          "cra7c_responsesummary": "By Friday",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(433fc24c-4d73-4773-abd6-3d8a8bb47055)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(b41c87ef-e96e-49cd-8456-79670c6612d4)",
+          "cra7c_answertext": "By Friday",
+          "cra7c_audiourl": null,
+          "cra7c_pointsearned": 5,
+          "cra7c_iscorrect": true,
+          "cra7c_gradingstatus": 793370001,
+          "cra7c_graderfeedback": null
+        },
+        {
+          "cra7c_responseid": "af522e86-8b70-4290-85bc-0203058a1343",
+          "cra7c_responsesummary": "Greenhouse gas emissions",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(433fc24c-4d73-4773-abd6-3d8a8bb47055)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(afb6ca27-d8d8-4ad1-b054-92a2e6a24fa1)",
+          "cra7c_answertext": "Greenhouse gas emissions",
+          "cra7c_audiourl": null,
+          "cra7c_pointsearned": 5,
+          "cra7c_iscorrect": true,
+          "cra7c_gradingstatus": 793370001,
+          "cra7c_graderfeedback": null
+        },
+        {
+          "cra7c_responseid": "891b486e-828e-400d-9d5f-e795c1547249",
+          "cra7c_responsesummary": "It is unprecedented",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(433fc24c-4d73-4773-abd6-3d8a8bb47055)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(a684f536-13a6-4a55-98e4-a9650004cff5)",
+          "cra7c_answertext": "It is unprecedented",
+          "cra7c_audiourl": null,
+          "cra7c_pointsearned": 5,
+          "cra7c_iscorrect": true,
+          "cra7c_gradingstatus": 793370001,
+          "cra7c_graderfeedback": null
+        },
+        {
+          "cra7c_responseid": "e34de5bc-5693-443e-b7a9-6dace7e64232",
+          "cra7c_responsesummary": "I believe technology...",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(433fc24c-4d73-4773-abd6-3d8a8bb47055)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(6e68deac-05d2-4756-ab53-af5e5c5a4bd2)",
+          "cra7c_answertext": "I believe technology has made life simpler in many ways, providing tools for communication, productivity, and entertainment that were unimaginable decades ago...",
+          "cra7c_audiourl": null,
+          "cra7c_pointsearned": 16,
+          "cra7c_iscorrect": null,
+          "cra7c_gradingstatus": 793370002,
+          "cra7c_graderfeedback": "Well-structured argument with examples"
+        },
+        {
+          "cra7c_responseid": "8c3bb6dd-53c8-47d0-9605-e447fb902ab6",
+          "cra7c_responsesummary": "Audio Response - Childhood Memory",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(433fc24c-4d73-4773-abd6-3d8a8bb47055)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(1ace173a-4a0b-44d0-a05e-d90848cd7c1f)",
+          "cra7c_answertext": "Audio Response - Childhood Memory",
+          "cra7c_audiourl": "https://example.com/audio/student104-q12",
+          "cra7c_pointsearned": 8,
+          "cra7c_iscorrect": null,
+          "cra7c_gradingstatus": 793370002,
+          "cra7c_graderfeedback": "Clear delivery, good details about the childhood birthday party"
+        },
+        {
+          "cra7c_responseid": "35afa124-5bb2-4c12-99f0-63d49a4192aa",
+          "cra7c_responsesummary": "Audio Response - Social Media",
+          "cra7c_Attempt@odata.bind": "/cra7c_attempts(433fc24c-4d73-4773-abd6-3d8a8bb47055)",
+          "cra7c_Question@odata.bind": "/cra7c_questions(ec4ec072-4a23-4ff1-898a-e225f5161df0)",
+          "cra7c_answertext": "Audio Response - Social Media",
+          "cra7c_audiourl": "https://example.com/audio/student104-q13",
+          "cra7c_pointsearned": 4,
+          "cra7c_iscorrect": null,
+          "cra7c_gradingstatus": 793370002,
+          "cra7c_graderfeedback": "Mentioned advantages but rushed through disadvantages"
+        }
+      ],
+      "entity": {
+        "MetadataId": "38e2103b-7260-48d2-b068-a304dfcf1a69",
+        "Attributes": [
+          {
+            "MetadataId": "2f1816e6-f968-4244-b471-52d6b5ed028e",
+            "IsPrimaryName": true,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_ResponseSummary",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Response Summary",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "String",
+            "AttributeTypeName": {
+              "Value": "StringType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 850,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.StringAttributeMetadata"
+          },
+          {
+            "MetadataId": "65d5c7de-cc0a-4458-a362-9b486757c374",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_Attempt",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Attempt",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Lookup",
+            "AttributeTypeName": {
+              "Value": "LookupType"
+            },
+            "Targets": [
+              "cra7c_attempt"
+            ],
+            "@odata.type": "Microsoft.Dynamics.CRM.LookupAttributeMetadata"
+          },
+          {
+            "MetadataId": "8b93204b-6df3-494b-b3db-e266f47727b2",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_Question",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Question",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Lookup",
+            "AttributeTypeName": {
+              "Value": "LookupType"
+            },
+            "Targets": [
+              "cra7c_question"
+            ],
+            "@odata.type": "Microsoft.Dynamics.CRM.LookupAttributeMetadata"
+          },
+          {
+            "MetadataId": "1c1daaa5-b1be-4946-a5ac-2137701c3772",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_AnswerText",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Answer Text",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Memo",
+            "AttributeTypeName": {
+              "Value": "MemoType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 2000,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.MemoAttributeMetadata"
+          },
+          {
+            "MetadataId": "03a38aec-b595-41de-95c7-dbbe713be6cf",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_AudioURL",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Audio URL",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "String",
+            "AttributeTypeName": {
+              "Value": "StringType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 100,
+            "FormatName": {
+              "Value": "Url"
+            },
+            "Format": "Url",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.StringAttributeMetadata"
+          },
+          {
+            "MetadataId": "8710ea48-2dfb-46c1-9f50-49eabdee60a9",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_PointsEarned",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Points Earned",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "Decimal",
+            "AttributeTypeName": {
+              "Value": "DecimalType"
+            },
+            "ImeMode": "Auto",
+            "MaxValue": 100000000000,
+            "MinValue": -100000000000,
+            "Precision": 2,
+            "@odata.type": "Microsoft.Dynamics.CRM.DecimalAttributeMetadata"
+          },
+          {
+            "MetadataId": "b3c82560-bb48-4586-9d65-afe3c7cff9ca",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_IsCorrect",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Is Correct",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "Boolean",
+            "AttributeTypeName": {
+              "Value": "BooleanType"
+            },
+            "DefaultValue": false,
+            "OptionSet": {
+              "IsCustomOptionSet": true,
+              "IsGlobal": false,
+              "IsCustomizable": {
+                "Value": true,
+                "CanBeChanged": false,
+                "ManagedPropertyLogicalName": "iscustomizable"
+              },
+              "IsManaged": false,
+              "ExternalTypeName": "",
+              "OptionSetType": "Boolean",
+              "Description": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "DisplayName": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "Is Correct",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "TrueOption": {
+                "Value": 1,
+                "IsManaged": false,
+                "ExternalValue": "",
+                "Label": {
+                  "LocalizedLabels": [
+                    {
+                      "Label": "Yes",
+                      "LanguageCode": 1033
+                    }
+                  ]
+                },
+                "Description": {
+                  "LocalizedLabels": []
+                }
+              },
+              "FalseOption": {
+                "Value": 0,
+                "IsManaged": false,
+                "ExternalValue": "",
+                "Label": {
+                  "LocalizedLabels": [
+                    {
+                      "Label": "No",
+                      "LanguageCode": 1033
+                    }
+                  ]
+                },
+                "Description": {
+                  "LocalizedLabels": []
+                }
+              }
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.BooleanAttributeMetadata"
+          },
+          {
+            "MetadataId": "1fd6a91e-dc37-47f8-80dc-498774f3290a",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_GradingStatus",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Grading Status",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Picklist",
+            "AttributeTypeName": {
+              "Value": "PicklistType"
+            },
+            "DefaultFormValue": -1,
+            "OptionSet": {
+              "IsCustomOptionSet": true,
+              "IsGlobal": false,
+              "IsCustomizable": {
+                "Value": true,
+                "CanBeChanged": false,
+                "ManagedPropertyLogicalName": "iscustomizable"
+              },
+              "ExternalTypeName": "",
+              "OptionSetType": "Picklist",
+              "Description": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "DisplayName": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "Grading Status",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "Options": [
+                {
+                  "Value": 793370000,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Pending",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370001,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "AutoGraded",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370002,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "ManuallyGraded",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.PicklistAttributeMetadata"
+          },
+          {
+            "MetadataId": "8c13edac-a0eb-4b1e-82bd-638b2764c5aa",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_GraderFeedback",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Grader Feedback",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "Memo",
+            "AttributeTypeName": {
+              "Value": "MemoType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 2000,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.MemoAttributeMetadata"
+          }
+        ],
+        "OwnershipType": "UserOwned",
+        "PrimaryNameAttribute": "cra7c_responsesummary",
+        "SchemaName": "cra7c_Response",
+        "HasNotes": false,
+        "HasActivities": false,
+        "IsAvailableOffline": false,
+        "IsActivity": false,
+        "ActivityTypeMask": 0,
+        "IsSolutionAware": false,
+        "Description": {
+          "LocalizedLabels": [
+            {
+              "Label": "Individual question responses from students",
+              "LanguageCode": 1033
+            }
+          ]
+        },
+        "DisplayCollectionName": {
+          "LocalizedLabels": [
+            {
+              "Label": "Responses",
+              "LanguageCode": 1033
+            }
+          ]
+        },
+        "DisplayName": {
+          "LocalizedLabels": [
+            {
+              "Label": "Response",
+              "LanguageCode": 1033
+            }
+          ]
+        },
+        "IsAuditEnabled": {
+          "Value": false
+        },
+        "IsValidForQueue": {
+          "Value": false
+        },
+        "IsConnectionsEnabled": {
+          "Value": false
+        },
+        "IsDuplicateDetectionEnabled": {
+          "Value": true
+        },
+        "IsDocumentManagementEnabled": false,
+        "EntityColor": null,
+        "IsRetentionEnabled": false,
+        "SyncToExternalSearchIndex": false,
+        "AutoRouteToOwnerQueue": false,
+        "IsSLAEnabled": false,
+        "IsQuickCreateEnabled": false,
+        "IsActivityParty": false,
+        "HasFeedback": false,
+        "AutoCreateAccessTeams": false,
+        "ChangeTrackingEnabled": false,
+        "IsKnowledgeManagementEnabled": false,
+        "EntityHelpUrlEnabled": false,
+        "EntityHelpUrl": null,
+        "IsMailMergeEnabled": {
+          "Value": true
+        },
+        "IsOfflineInMobileClient": {
+          "Value": false
+        },
+        "ManyToOneRelationships": [
+          {
+            "MetadataId": "703e55ed-f9d9-4e3f-8a9e-a61edfd2dfbf",
+            "SchemaName": "cra7c_Response_cra7c_Attempt_cra7c_Attempt",
+            "ReferencingAttribute": "cra7c_attempt",
+            "ReferencedEntity": "cra7c_attempt",
+            "ReferencingEntity": "cra7c_response",
+            "ReferencedAttribute": "cra7c_attemptid",
+            "ReferencingEntityNavigationPropertyName": "cra7c_Attempt",
+            "RelationshipType": "OneToManyRelationship",
+            "IsCustomRelationship": true,
+            "IsValidForAdvancedFind": true,
+            "IsCustomizable": {
+              "Value": true,
+              "CanBeChanged": true,
+              "ManagedPropertyLogicalName": "iscustomizable"
+            },
+            "CascadeConfiguration": {
+              "Assign": "NoCascade",
+              "Delete": "RemoveLink",
+              "Merge": "NoCascade",
+              "Reparent": "NoCascade",
+              "Share": "NoCascade",
+              "Unshare": "NoCascade",
+              "RollupView": "NoCascade",
+              "Archive": "RemoveLink"
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.OneToManyRelationshipMetadata"
+          },
+          {
+            "MetadataId": "cf99d939-70ea-4e76-b484-6afdfb9df938",
+            "SchemaName": "cra7c_Response_cra7c_Question_cra7c_Question",
+            "ReferencingAttribute": "cra7c_question",
+            "ReferencedEntity": "cra7c_question",
+            "ReferencingEntity": "cra7c_response",
+            "ReferencedAttribute": "cra7c_questionid",
+            "ReferencingEntityNavigationPropertyName": "cra7c_Question",
+            "RelationshipType": "OneToManyRelationship",
+            "IsCustomRelationship": true,
+            "IsValidForAdvancedFind": true,
+            "IsCustomizable": {
+              "Value": true,
+              "CanBeChanged": true,
+              "ManagedPropertyLogicalName": "iscustomizable"
+            },
+            "CascadeConfiguration": {
+              "Assign": "NoCascade",
+              "Delete": "RemoveLink",
+              "Merge": "NoCascade",
+              "Reparent": "NoCascade",
+              "Share": "NoCascade",
+              "Unshare": "NoCascade",
+              "RollupView": "NoCascade",
+              "Archive": "RemoveLink"
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.OneToManyRelationshipMetadata"
+          }
+        ],
+        "@odata.type": "Microsoft.Dynamics.CRM.EntityMetadata"
+      },
+      "dataPayloadFormat": "Dataverse",
+      "tableSourceType": "DataModelProposal"
+    },
+    {
+      "data": [
+        {
+          "cra7c_questionbankid": "cf7c85f4-c725-422f-944c-b854f14a4841",
+          "cra7c_title": "Promise Handling",
+          "cra7c_questiontext": "What is the correct way to handle errors in async/await?",
+          "cra7c_questiontype": 793370000,
+          "cra7c_category": "JavaScript",
+          "cra7c_difficulty": 793370001,
+          "cra7c_optionsjson": "[\"Use try-catch blocks\", \"Use .then() and .catch()\", \"Use error callbacks\", \"Promises don't need error handling\"]",
+          "cra7c_correctanswer": "Use try-catch blocks",
+          "cra7c_keywords": null,
+          "cra7c_defaultpoints": 5,
+          "cra7c_codelanguage": null,
+          "cra7c_tags": "async,await,promises,error-handling",
+          "cra7c_createdby": "teacher_001",
+          "cra7c_createdat": "2026-04-15T10:30:00.000Z",
+          "cra7c_usagecount": 12
+        },
+        {
+          "cra7c_questionbankid": "e48ef022-2c84-403a-a4a7-fb6a8f6b1883",
+          "cra7c_title": "Array Destructuring",
+          "cra7c_questiontext": "Which syntax correctly destructures the first two elements of an array?",
+          "cra7c_questiontype": 793370000,
+          "cra7c_category": "JavaScript",
+          "cra7c_difficulty": 793370000,
+          "cra7c_optionsjson": "[\"let [a, b] = array;\", \"let {a, b} = array;\", \"let (a, b) = array;\", \"let a, b = array;\"]",
+          "cra7c_correctanswer": "let [a, b] = array;",
+          "cra7c_keywords": null,
+          "cra7c_defaultpoints": 5,
+          "cra7c_codelanguage": null,
+          "cra7c_tags": "es6,destructuring,arrays,syntax",
+          "cra7c_createdby": "teacher_002",
+          "cra7c_createdat": "2026-04-18T14:20:00.000Z",
+          "cra7c_usagecount": 8
+        },
+        {
+          "cra7c_questionbankid": "e571e8cc-fbb4-4dfc-ac32-8d685083110d",
+          "cra7c_title": "CSS Flexbox Layout",
+          "cra7c_questiontext": "Explain how the justify-content property works in a flex container and provide three common values.",
+          "cra7c_questiontype": 793370001,
+          "cra7c_category": "CSS",
+          "cra7c_difficulty": 793370001,
+          "cra7c_optionsjson": null,
+          "cra7c_correctanswer": null,
+          "cra7c_keywords": "justify-content,flex,alignment,flex-start,center,space-between",
+          "cra7c_defaultpoints": 10,
+          "cra7c_codelanguage": null,
+          "cra7c_tags": "css,flexbox,layout,alignment",
+          "cra7c_createdby": "teacher_001",
+          "cra7c_createdat": "2026-04-20T09:15:00.000Z",
+          "cra7c_usagecount": 5
+        },
+        {
+          "cra7c_questionbankid": "1a323bed-82e7-4763-a02f-77b04fefde2b",
+          "cra7c_title": "Python List Comprehension",
+          "cra7c_questiontext": "Write a list comprehension that creates a list of squares for all even numbers from 1 to 20.",
+          "cra7c_questiontype": 793370002,
+          "cra7c_category": "Python",
+          "cra7c_difficulty": 793370002,
+          "cra7c_optionsjson": null,
+          "cra7c_correctanswer": "squares = [x**2 for x in range(1, 21) if x % 2 == 0]",
+          "cra7c_keywords": null,
+          "cra7c_defaultpoints": 15,
+          "cra7c_codelanguage": "python",
+          "cra7c_tags": "python,list-comprehension,loops,filtering",
+          "cra7c_createdby": "teacher_003",
+          "cra7c_createdat": "2026-04-22T11:45:00.000Z",
+          "cra7c_usagecount": 3
+        },
+        {
+          "cra7c_questionbankid": "a8938483-314b-490f-b763-1f8a2b09a3cc",
+          "cra7c_title": "Climate Change Effects",
+          "cra7c_questiontext": "According to recent scientific studies, what are the three primary effects of climate change on marine ecosystems?",
+          "cra7c_questiontype": 793370004,
+          "cra7c_category": "IELTS",
+          "cra7c_difficulty": 793370001,
+          "cra7c_optionsjson": "[\"Ocean acidification, rising sea temperatures, coral bleaching\", \"Increased rainfall, stronger currents, larger fish populations\", \"Deeper ocean trenches, more hurricanes, colder poles\", \"Higher salinity, fewer waves, more underwater volcanoes\"]",
+          "cra7c_correctanswer": "Ocean acidification, rising sea temperatures, coral bleaching",
+          "cra7c_keywords": null,
+          "cra7c_defaultpoints": 10,
+          "cra7c_codelanguage": null,
+          "cra7c_tags": "climate,environment,oceans,ecosystems,reading-comprehension",
+          "cra7c_createdby": "teacher_002",
+          "cra7c_createdat": "2026-04-25T13:00:00.000Z",
+          "cra7c_usagecount": 7
+        },
+        {
+          "cra7c_questionbankid": "7e1396a4-ab0c-4638-baa8-9e48550e36f0",
+          "cra7c_title": "Formal Email Writing",
+          "cra7c_questiontext": "Write a formal email to a university professor requesting an extension on your research assignment due to unforeseen circumstances. Include proper salutation, explanation, and closing.",
+          "cra7c_questiontype": 793370005,
+          "cra7c_category": "IELTS",
+          "cra7c_difficulty": 793370002,
+          "cra7c_optionsjson": null,
+          "cra7c_correctanswer": null,
+          "cra7c_keywords": "formal,email,request,professional-tone,structure,politeness",
+          "cra7c_defaultpoints": 20,
+          "cra7c_codelanguage": null,
+          "cra7c_tags": "ielts,writing,formal-communication,email",
+          "cra7c_createdby": "teacher_002",
+          "cra7c_createdat": "2026-04-28T16:30:00.000Z",
+          "cra7c_usagecount": 4
+        }
+      ],
+      "entity": {
+        "MetadataId": "531cc2b2-6953-4ec0-91a6-da78ce14018c",
+        "Attributes": [
+          {
+            "MetadataId": "655aca1c-abd7-46c6-96bb-7dc398f56889",
+            "IsPrimaryName": true,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_Title",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Title",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "String",
+            "AttributeTypeName": {
+              "Value": "StringType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 850,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.StringAttributeMetadata"
+          },
+          {
+            "MetadataId": "5610fa0d-ea26-4766-a758-2a500747902d",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_QuestionText",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Question Text",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Memo",
+            "AttributeTypeName": {
+              "Value": "MemoType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 2000,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.MemoAttributeMetadata"
+          },
+          {
+            "MetadataId": "b5d39b22-1a4c-45e5-ac40-b76ce48ada7b",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_QuestionType",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Question Type",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Picklist",
+            "AttributeTypeName": {
+              "Value": "PicklistType"
+            },
+            "DefaultFormValue": -1,
+            "OptionSet": {
+              "IsCustomOptionSet": true,
+              "IsGlobal": false,
+              "IsCustomizable": {
+                "Value": true,
+                "CanBeChanged": false,
+                "ManagedPropertyLogicalName": "iscustomizable"
+              },
+              "ExternalTypeName": "",
+              "OptionSetType": "Picklist",
+              "Description": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "DisplayName": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "Question Type",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "Options": [
+                {
+                  "Value": 793370000,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "MCQ",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370001,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "ShortText",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370002,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Code",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370003,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Listening",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370004,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Reading",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370005,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Writing",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370006,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Speaking",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370007,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Interview",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.PicklistAttributeMetadata"
+          },
+          {
+            "MetadataId": "d161bdaa-a63a-4741-9511-6a4c9c90a4a7",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_Category",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Category",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "String",
+            "AttributeTypeName": {
+              "Value": "StringType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 100,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.StringAttributeMetadata"
+          },
+          {
+            "MetadataId": "cdaee552-d73f-478a-80ca-591bf96f5dc8",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_Difficulty",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Difficulty",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Picklist",
+            "AttributeTypeName": {
+              "Value": "PicklistType"
+            },
+            "DefaultFormValue": -1,
+            "OptionSet": {
+              "IsCustomOptionSet": true,
+              "IsGlobal": false,
+              "IsCustomizable": {
+                "Value": true,
+                "CanBeChanged": false,
+                "ManagedPropertyLogicalName": "iscustomizable"
+              },
+              "ExternalTypeName": "",
+              "OptionSetType": "Picklist",
+              "Description": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "DisplayName": {
+                "LocalizedLabels": [
+                  {
+                    "Label": "Difficulty",
+                    "LanguageCode": 1033
+                  }
+                ]
+              },
+              "Options": [
+                {
+                  "Value": 793370000,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Easy",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370001,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Medium",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Value": 793370002,
+                  "ExternalValue": "",
+                  "IsManaged": false,
+                  "Label": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "Hard",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  },
+                  "Description": {
+                    "LocalizedLabels": [
+                      {
+                        "Label": "",
+                        "LanguageCode": 1033
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.PicklistAttributeMetadata"
+          },
+          {
+            "MetadataId": "05224bc0-2b78-4a3d-8ec5-b1f89b1175ca",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_OptionsJSON",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Options (JSON)",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "Memo",
+            "AttributeTypeName": {
+              "Value": "MemoType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 2000,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.MemoAttributeMetadata"
+          },
+          {
+            "MetadataId": "eb7b33f5-2e5d-414f-a156-9883492cd9d0",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_CorrectAnswer",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Correct Answer",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "Memo",
+            "AttributeTypeName": {
+              "Value": "MemoType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 2000,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.MemoAttributeMetadata"
+          },
+          {
+            "MetadataId": "2fd27fe5-6940-4335-9601-c757ad7eec30",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_Keywords",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Keywords",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "Memo",
+            "AttributeTypeName": {
+              "Value": "MemoType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 2000,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.MemoAttributeMetadata"
+          },
+          {
+            "MetadataId": "f038651b-66c3-4c3c-ad58-823c1c1616a7",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_DefaultPoints",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Default Points",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Integer",
+            "AttributeTypeName": {
+              "Value": "IntegerType"
+            },
+            "MaxValue": 2147483647,
+            "MinValue": -2147483648,
+            "Format": "None",
+            "@odata.type": "Microsoft.Dynamics.CRM.IntegerAttributeMetadata"
+          },
+          {
+            "MetadataId": "055deefa-9aec-4cee-98e7-c7cc26ee59eb",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_CodeLanguage",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Code Language",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "String",
+            "AttributeTypeName": {
+              "Value": "StringType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 100,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.StringAttributeMetadata"
+          },
+          {
+            "MetadataId": "387a0267-c2e4-4fee-961a-b71230662d58",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_Tags",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Tags",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "None"
+            },
+            "AttributeType": "String",
+            "AttributeTypeName": {
+              "Value": "StringType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 100,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.StringAttributeMetadata"
+          },
+          {
+            "MetadataId": "fe552d04-cfe4-437f-8dc7-42894437b2af",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_CreatedBy",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Created By",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "String",
+            "AttributeTypeName": {
+              "Value": "StringType"
+            },
+            "ImeMode": "Auto",
+            "MaxLength": 100,
+            "FormatName": {
+              "Value": "Text"
+            },
+            "Format": "Text",
+            "AutoNumberFormat": null,
+            "@odata.type": "Microsoft.Dynamics.CRM.StringAttributeMetadata"
+          },
+          {
+            "MetadataId": "df6388a4-0137-4cb0-9641-02724d00ff3f",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_CreatedAt",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Created At",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "ImeMode": "Auto",
+            "AttributeType": "DateTime",
+            "AttributeTypeName": {
+              "Value": "DateTimeType"
+            },
+            "Format": "DateAndTime",
+            "DateTimeBehavior": {
+              "Value": "UserLocal"
+            },
+            "CanChangeDateTimeBehavior": {
+              "Value": true,
+              "CanBeChanged": true,
+              "ManagedPropertyLogicalName": "canmodifybehavior"
+            },
+            "@odata.type": "Microsoft.Dynamics.CRM.DateTimeAttributeMetadata"
+          },
+          {
+            "MetadataId": "a98f02d1-b804-46a0-9d9d-b63ffa9228ab",
+            "IsPrimaryName": false,
+            "IsSecured": false,
+            "IsValidForUpdate": true,
+            "IsValidForRead": true,
+            "SchemaName": "cra7c_UsageCount",
+            "SourceType": 0,
+            "ExternalName": null,
+            "Description": {
+              "LocalizedLabels": [
+                {
+                  "Label": "",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "DisplayName": {
+              "LocalizedLabels": [
+                {
+                  "Label": "Usage Count",
+                  "LanguageCode": 1033
+                }
+              ]
+            },
+            "RequiredLevel": {
+              "Value": "ApplicationRequired"
+            },
+            "AttributeType": "Integer",
+            "AttributeTypeName": {
+              "Value": "IntegerType"
+            },
+            "MaxValue": 2147483647,
+            "MinValue": -2147483648,
+            "Format": "None",
+            "@odata.type": "Microsoft.Dynamics.CRM.IntegerAttributeMetadata"
+          }
+        ],
+        "OwnershipType": "UserOwned",
+        "PrimaryNameAttribute": "cra7c_title",
+        "SchemaName": "cra7c_QuestionBank",
+        "HasNotes": false,
+        "HasActivities": false,
+        "IsAvailableOffline": false,
+        "IsActivity": false,
+        "ActivityTypeMask": 0,
+        "IsSolutionAware": false,
+        "Description": {
+          "LocalizedLabels": [
+            {
+              "Label": "Reusable questions that teachers can save and import into exams",
+              "LanguageCode": 1033
+            }
+          ]
+        },
+        "DisplayCollectionName": {
+          "LocalizedLabels": [
+            {
+              "Label": "Question Banks",
+              "LanguageCode": 1033
+            }
+          ]
+        },
+        "DisplayName": {
+          "LocalizedLabels": [
+            {
+              "Label": "Question Bank",
+              "LanguageCode": 1033
+            }
+          ]
+        },
+        "IsAuditEnabled": {
+          "Value": false
+        },
+        "IsValidForQueue": {
+          "Value": false
+        },
+        "IsConnectionsEnabled": {
+          "Value": false
+        },
+        "IsDuplicateDetectionEnabled": {
+          "Value": true
+        },
+        "IsDocumentManagementEnabled": false,
+        "EntityColor": null,
+        "IsRetentionEnabled": false,
+        "SyncToExternalSearchIndex": false,
+        "AutoRouteToOwnerQueue": false,
+        "IsSLAEnabled": false,
+        "IsQuickCreateEnabled": false,
+        "IsActivityParty": false,
+        "HasFeedback": false,
+        "AutoCreateAccessTeams": false,
+        "ChangeTrackingEnabled": false,
+        "IsKnowledgeManagementEnabled": false,
+        "EntityHelpUrlEnabled": false,
+        "EntityHelpUrl": null,
+        "IsMailMergeEnabled": {
+          "Value": true
+        },
+        "IsOfflineInMobileClient": {
+          "Value": false
+        },
+        "ManyToOneRelationships": [],
+        "@odata.type": "Microsoft.Dynamics.CRM.EntityMetadata"
+      },
+      "dataPayloadFormat": "Dataverse",
+      "tableSourceType": "DataModelProposal"
+    }
+  ]
+}
