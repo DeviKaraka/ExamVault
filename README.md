@@ -1,8 +1,8 @@
-# ExamVault 
+# ExamVault
 
 **AI-Powered Unified Assessment Platform**
 
-ExamVault is a centralized, cloud-based examination platform that brings together coding tests, MCQs, aptitude exams, descriptive assessments, and interview rounds — all within a single secure, AI-driven environment.
+ExamVault is a centralized, cloud-based examination platform built with **React / TypeScript** and powered by **Azure OpenAI Service**. It brings together coding tests, MCQs, aptitude exams, descriptive assessments, and interview rounds — all within a single secure, AI-driven environment.
 
 ---
 
@@ -10,10 +10,9 @@ ExamVault is a centralized, cloud-based examination platform that brings togethe
 
 - [Overview](#overview)
 - [Key AI Capabilities](#key-ai-capabilities)
-- [Project Structure](#project-structure)
 - [Architecture](#architecture)
-- [Features](#features)
 - [Tech Stack](#tech-stack)
+- [Features](#features)
 - [Role-Based Access](#role-based-access)
 - [Security and Examination Integrity](#security-and-examination-integrity)
 - [Scope](#scope)
@@ -24,7 +23,7 @@ ExamVault is a centralized, cloud-based examination platform that brings togethe
 
 ## Overview
 
-ExamVault is developed using **TypeScript/TSX** and **Azure OpenAI Service** to automate question generation, answer evaluation, malpractice detection, and student performance analysis in real time.
+ExamVault is developed using **TypeScript/TSX + React** with **Azure OpenAI Service** to automate question generation, answer evaluation, malpractice detection, and student performance analysis in real time.
 
 ### The Problem it Solves
 
@@ -35,156 +34,19 @@ ExamVault is developed using **TypeScript/TSX** and **Azure OpenAI Service** to 
 - Existing solutions struggle with scalability and concurrent users
 - Delayed evaluation affects student feedback and learning
 
-**"ExamVault is not just integrated with AI — it is built around AI-driven intelligence and automation."**
+> **"ExamVault is not just integrated with AI — it is built around AI-driven intelligence and automation."**
 
 ---
 
 ## Key AI Capabilities
 
-| AI Capability | Description |
+| AI Capability | Implementation |
 |---|---|
-| **AI Question Generation** | Generates MCQs, coding, aptitude, and descriptive questions using Azure OpenAI Service |
-| **AI Evaluation Engine** | Automatically evaluates objective, coding, and descriptive answers with AI-based scoring |
-| **AI Proctoring** | Real-time face, audio, tab-switch, and activity monitoring during examinations |
-| **AI Analytics** | Dashboards with AI-based performance insights and analytics |
-| **Adaptive Difficulty** | Dynamically adjusts question difficulty based on student performance patterns |
-
----
-
-## Project Structure
-
-```
-examvault/
-│   project.json                  # Project configuration
-│   README.md
-│
-├── .agent/
-│   └── plans/
-│           examvault.md          # Agent planning document
-│
-├── apps/
-│   └── exam-vault/
-│       │   power.config.json
-│       │
-│       └── src/
-│           │   app.tsx           # Root application component
-│           │   index.css         # Global styles
-│           │   main.tsx          # Entry point
-│           │
-│           ├── components/
-│           │   │   ai-question-generator.tsx   # AI-powered question generation UI
-│           │   │   role-selector.tsx           # Role-based entry point selector
-│           │   │
-│           │   ├── system/
-│           │   │       error-boundary.tsx      # Global error handling
-│           │   │
-│           │   └── ui/                         # Reusable UI component library
-│           │           accordion.tsx           button.tsx
-│           │           alert.tsx               card.tsx
-│           │           alert-dialog.tsx        chart.tsx
-│           │           avatar.tsx              checkbox.tsx
-│           │           badge.tsx               dialog.tsx
-│           │           breadcrumb.tsx          form.tsx
-│           │           calendar.tsx            input.tsx
-│           │           carousel.tsx            select.tsx
-│           │           collapsible.tsx         sidebar.tsx
-│           │           command.tsx             skeleton.tsx
-│           │           drawer.tsx              table.tsx
-│           │           empty.tsx               tabs.tsx
-│           │           field.tsx               textarea.tsx
-│           │           hover-card.tsx          toggle.tsx
-│           │           pagination.tsx          tooltip.tsx
-│           │           progress.tsx            sonner.tsx
-│           │           radio-group.tsx         spinner.tsx
-│           │           ... and more
-│           │
-│           ├── generated/                      # Auto-generated data layer
-│           │   ├── components/
-│           │   │       in-memory-data-banner.tsx   # Dev-mode in-memory data indicator
-│           │   │
-│           │   ├── hooks/                      # Reactive data-fetching hooks
-│           │   │       use-attempt.ts
-│           │   │       use-exam.ts
-│           │   │       use-question-bank.ts
-│           │   │       use-question.ts
-│           │   │       use-response.ts
-│           │   │       use-section.ts
-│           │   │
-│           │   ├── models/                     # TypeScript data models
-│           │   │       attempt-model.ts
-│           │   │       exam-model.ts
-│           │   │       question-model.ts
-│           │   │       question-bank-model.ts
-│           │   │       response-model.ts
-│           │   │       section-model.ts
-│           │   │       common-models.ts
-│           │   │
-│           │   ├── services/                   # Data access & API services
-│           │   │       attempt-service.ts
-│           │   │       exam-service.ts
-│           │   │       question-service.ts
-│           │   │       question-bank-service.ts
-│           │   │       response-service.ts
-│           │   │       section-service.ts
-│           │   │
-│           │   └── validators/                 # Input validation schemas
-│           │           attempt-validator.ts
-│           │           exam-validator.ts
-│           │           question-validator.ts
-│           │           question-bank-validator.ts
-│           │           response-validator.ts
-│           │           section-validator.ts
-│           │
-│           ├── hooks/                          # Custom React hooks
-│           │       use-mobile.ts               # Responsive/mobile detection
-│           │       use-proctoring.ts           # AI proctoring integration
-│           │       use-user.ts                 # User session & auth state
-│           │
-│           ├── lib/                            # Shared utilities & core logic
-│           │       email-service.ts            # Email notification service
-│           │       grading.ts                  # Grading logic & scoring engine
-│           │       query-client.ts             # API/query client configuration
-│           │       store.ts                    # Global state store
-│           │       utils.ts                    # General utility functions
-│           │
-│           └── pages/                          # Application pages by role
-│               │   index.tsx                   # Landing / home page
-│               │   not-found.tsx               # 404 page
-│               │   student-login.tsx
-│               │   student-signup.tsx
-│               │   teacher-login.tsx
-│               │   teacher-signup.tsx
-│               │   _layout.tsx                 # Shared layout wrapper
-│               │
-│               ├── admin/
-│               │       organization-settings.tsx   # Admin org config panel
-│               │
-│               ├── student/
-│               │       exam.tsx                # Live exam-taking interface
-│               │       join.tsx                # Join exam via code/link
-│               │       result.tsx              # Individual result & AI feedback
-│               │       profile.tsx             # Student profile
-│               │       login.tsx
-│               │       forgot-password.tsx
-│               │
-│               └── teacher/
-│                       dashboard.tsx           # Teacher overview & stats
-│                       exam-builder.tsx        # Create & configure exams
-│                       question-bank.tsx       # Manage question library
-│                       grading.tsx             # Batch grading interface
-│                       grade-attempt.tsx       # Individual attempt grading
-│                       analytics.tsx           # Performance analytics
-│                       email-settings.tsx      # Notification configuration
-│                       login.tsx
-│                       forgot-password.tsx
-│
-├── data-model/
-│       full-data-model.json      # Complete data schema definition
-│
-└── docs/
-        overview.md               # Project overview documentation
-        storage-setup-guide.md    # Storage configuration guide
-```
+| **AI Question Generation** | Azure OpenAI GPT-4o via `ai-question-generator.tsx` — generates MCQs, coding, aptitude, descriptive questions |
+| **AI Answer Evaluation** | Azure OpenAI called via `/api/evaluate-answer` proxy in `grading.ts` — scores descriptive answers with rubric-based feedback |
+| **AI Proctoring** | Real-time webcam, audio, tab-switch, fullscreen monitoring via `use-proctoring.ts` |
+| **AI Analytics Summary** | Natural language cohort performance summaries via `/api/analytics/summarize` in `analytics.tsx` |
+| **Adaptive Difficulty** | IRT-inspired difficulty adjustment engine in `adaptive-difficulty.ts` |
 
 ---
 
@@ -194,95 +56,40 @@ examvault/
 
 | Layer | Technologies | Responsibility |
 |---|---|---|
-| Presentation | TypeScript + TSX + React | Responsive, role-based UI for admins, faculty, and students |
-| Authentication | Microsoft Azure Active Directory | Secure auth and role-based access control |
-| Backend & Automation | TypeScript + Microsoft Power Automate | Automated workflows, notifications, and exam processing |
-| Database | SharePoint | Secure storage for exams, submissions, and records |
-| AI Integration | Azure OpenAI Service | Question generation, evaluation, and intelligent processing |
-| Proctoring | WebRTC + MediaDevices API + AI Monitoring | Real-time webcam, audio, and activity monitoring |
-| Analytics | Microsoft Power BI | Real-time dashboards and performance reporting |
+| Presentation | React + TypeScript/TSX + Tailwind CSS | Responsive, role-based UI for admins, faculty, and students |
+| Authentication | Azure Active Directory (MSAL) + JWT (httpOnly cookies) | Secure auth and role-based access control — `auth-service.ts` |
+| Backend & Automation | Azure Functions (TypeScript) | API proxy for AI evaluation, auth endpoints, notifications |
+| Database | Azure Cosmos DB / SharePoint Lists (configurable) | Exam records, question banks, submissions, user data |
+| AI Integration | Azure OpenAI Service (GPT-4o) | Question generation, answer evaluation, analytics summaries |
+| Proctoring Engine | WebRTC + MediaDevices API + Web Audio API | Webcam, microphone, tab-switch, audio level monitoring |
+| Analytics Dashboard | Power BI Embedded + in-app charts | Performance dashboards, cohort analytics, score distributions |
 
 ### Architecture Flow
 
 ```
-Frontend Layer (TypeScript / TSX / React)
-                        ↓
-Authentication Layer (Microsoft Azure Active Directory)
-                        ↓
-Backend & Automation Layer (TypeScript + Microsoft Power Automate)
-                        ↓
-Database Layer (SharePoint)
-                        ↓
-AI Integration Layer (Azure OpenAI Service)
-                        ↓
-Monitoring & Proctoring Engine (WebRTC + AI-Based Monitoring APIs)
-                        ↓
-Analytics Dashboard (Microsoft Power BI)
+React Frontend (TypeScript/TSX)
+        ↓
+Azure AD (MSAL) Authentication Layer
+        ↓
+Azure Functions API Layer  ──── Azure OpenAI Service (GPT-4o)
+        ↓
+Data Layer (SharePoint Lists / Azure Cosmos DB)
+        ↓
+AI Proctoring Engine (WebRTC + MediaDevices)
+        ↓
+Analytics (Power BI Embedded + in-app charts)
 ```
 
 ### Examination Data Flow
 
-1. Admin creates and schedules examinations via the exam builder (`exam-builder.tsx`)
-2. AI generates examination questions using Azure OpenAI Service (`ai-question-generator.tsx`)
-3. Students securely authenticate and enter the examination environment (`join.tsx`)
-4. AI proctoring activates webcam, microphone, and tab monitoring (`use-proctoring.ts`)
-5. Student responses are stored and processed via the services layer (`response-service.ts`)
-6. AI-based evaluation automatically scores answers using the grading engine (`grading.ts`)
-7. Results and reports are generated with automated notifications (`email-service.ts`)
+1. Teacher creates and configures examinations via `exam-builder.tsx`
+2. AI generates questions using Azure OpenAI Service (`ai-question-generator.tsx`)
+3. Students authenticate via Azure AD and enter the exam (`join.tsx`)
+4. AI proctoring activates: webcam, microphone, tab-switch, audio (`use-proctoring.ts`)
+5. Student responses are stored via the services layer (`response-service.ts`)
+6. AI evaluation scores descriptive answers; automated grading for MCQ/coding (`grading.ts`)
+7. Results and notifications are sent via `email-service.ts`
 8. Analytics dashboards update with performance insights (`analytics.tsx`)
-
----
-
-## Features
-
-### Authentication & Access Control
-
-- Separate login and signup pages for teachers and students
-- Microsoft Azure Active Directory-based secure authentication
-- Secure session management handled via `use-user.ts`
-- Password recovery flows for both roles (`forgot-password.tsx`)
-
-### AI-Powered Exam Creation
-
-- Faculty provide subject, topic, difficulty, question type, and count (`ai-question-generator.tsx`)
-- AI engine returns a complete question paper with answer key within 60 seconds
-- Supports MCQ, Coding, Descriptive, Aptitude, and Verbal question types
-- Editable AI drafts — faculty can modify before publishing (`exam-builder.tsx`)
-- Question bank seeded from AI-generated content for reuse (`question-bank.tsx`)
-
-### Secure Examination Environment
-
-- Webcam and microphone access with explicit student consent (`use-proctoring.ts`)
-- Voice and background noise detection for suspicious audio activity
-- Full-screen enforcement with instant warning alerts on exit detection
-- Tab-switch and focus-loss detection using Page Visibility API
-- Countdown timer with automatic exam submission on expiry (`exam.tsx`)
-- Configurable warning system — repeated violations can auto-terminate the exam
-
-### Automated Evaluation
-
-| Exam Type | AI Evaluation Method |
-|---|---|
-| MCQ / Objective | Instant automated grading with negative marking support |
-| Coding Answers | Code execution with hidden test cases and performance-based scoring |
-| Descriptive Answers | AI-powered semantic evaluation and rubric-based scoring |
-| Aptitude Tests | Automated numerical and logic-based answer evaluation |
-| Interview Assessments | AI-based communication and response analysis *(Future Enhancement)* |
-
-### Analytics & Reporting
-
-- Student individual performance dashboard with historical trends (`result.tsx`)
-- Cohort-level analytics: average, distribution, topic mastery heatmaps (`analytics.tsx`)
-- AI-generated natural language performance summary per student
-- Exam audit report including proctoring flags and timestamps
-- Exportable reports in PDF and Excel formats
-
-### Notifications & Communication
-
-- Exam schedule notifications via email and in-app alerts (`email-service.ts`)
-- Real-time admin alerts on proctoring violations
-- Result publication notifications to students
-- Configurable email settings per teacher (`email-settings.tsx`)
 
 ---
 
@@ -290,46 +97,102 @@ Analytics Dashboard (Microsoft Power BI)
 
 ### Frontend & UI
 
-- **TypeScript + TSX** — type-safe frontend development
-- **React** — component-based UI with hooks-first architecture
+- **React 18 + TypeScript/TSX** — component-based, hooks-first architecture
 - **Tailwind CSS** — utility-first styling
-- **shadcn/ui** — accessible, composable component library (`/components/ui/`)
+- **shadcn/ui** — accessible, composable component library
 
-### Core Libraries & State
+### State & Data
 
-- **React Query** — server state and data fetching (`query-client.ts`)
-- **Global Store** — client-side state management (`store.ts`)
+- **React Query (TanStack Query)** — server state, caching, and data fetching
+- **Zustand** — global client-side state (`store.ts`)
 - **Custom Hooks** — `use-user.ts`, `use-proctoring.ts`, `use-mobile.ts`
 
-### Generated Data Layer
+### Backend
 
-- **Models** — typed contracts for Exam, Question, Attempt, Response, Section, QuestionBank
-- **Services** — data access abstraction for each entity
-- **Validators** — input validation schemas for all operations
-- **Hooks** — reactive data-fetching hooks per entity
+- **Azure Functions (TypeScript)** — serverless API endpoints
+  - `POST /api/evaluate-answer` — Azure OpenAI descriptive answer evaluation
+  - `POST /api/auth/login` — JWT authentication with httpOnly cookies
+  - `POST /api/analytics/summarize` — AI performance summary generation
 
-### Backend & Automation
+### Authentication & Security
 
-- **Microsoft Power Automate** — automated workflows and notifications
-- **Azure OpenAI Service** — AI-powered evaluation and question generation
-- **Email Service** — notification delivery (`email-service.ts`)
-
-### Database
-
-- **SharePoint Lists** — structured data management for exam records and workflows
-- **In-Memory Fallback** — development mode data layer (`in-memory-data-banner.tsx`)
+- **Azure Active Directory (MSAL)** — enterprise SSO and role-based access
+- **JWT in httpOnly cookies** — XSS-resistant token storage (replaces localStorage)
+- **bcrypt** — password hashing for local development fallback
 
 ### AI & Machine Learning
 
-- **Azure OpenAI Service** — answer evaluation and question processing
-- **NLP Processing** — semantic answer checking and intelligent response evaluation
-- **Grading Engine** — custom scoring logic with rubric support (`grading.ts`)
+- **Azure OpenAI Service (GPT-4o)** — question generation, answer evaluation
+- **Adaptive Difficulty Engine** — IRT-inspired algorithm (`adaptive-difficulty.ts`)
+- **Behavioral Biometrics scaffold** — WebAuthn + keystroke dynamics (`biometric-auth.ts`)
 
-### Monitoring & Proctoring
+### Database
 
-- **WebRTC** — live video and audio streaming during examinations
-- **MediaDevices & Page Visibility APIs** — webcam, microphone, and tab-switch detection
-- **Web Audio API** — suspicious audio and background noise analysis
+- **SharePoint Lists** — configurable structured data store for exam records
+- **In-Memory Fallback** — development mode data layer
+
+### Analytics
+
+- **Power BI Embedded** — enterprise dashboards (configure via `VITE_POWERBI_EMBED_URL`)
+- **In-app score distribution + topic mastery charts** — `analytics.tsx`
+
+### Proctoring
+
+- **WebRTC** — live video and audio capture
+- **MediaDevices API** — webcam and microphone access
+- **Page Visibility API** — tab-switch and focus-loss detection
+- **Web Audio API** — background noise and audio level analysis
+
+---
+
+## Features
+
+### Authentication & Access Control
+
+- Separate login and signup flows for teachers and students
+- Azure Active Directory MSAL integration for institutional SSO
+- Secure JWT sessions via httpOnly cookies (`auth-service.ts`)
+- Password recovery flows for both roles
+
+### AI-Powered Exam Creation
+
+- Faculty specify subject, topic, difficulty, type, and count
+- Azure OpenAI GPT-4o returns a complete question paper in under 60 seconds
+- Supports MCQ, Coding, Descriptive, Aptitude, and Verbal question types
+- Editable AI drafts before publishing (`exam-builder.tsx`)
+
+### Secure Examination Environment
+
+- Webcam and microphone with student consent (`use-proctoring.ts`)
+- Voice and background noise detection
+- Fullscreen enforcement with warning alerts on exit
+- Tab-switch detection via Page Visibility API
+- Countdown timer with automatic submission on expiry
+- Configurable violation threshold with auto-termination
+
+### Automated AI Evaluation
+
+| Exam Type | Method |
+|---|---|
+| MCQ / Objective | Instant automated grading with optional negative marking |
+| Coding Answers | Test-case-based scoring with per-case weights |
+| Descriptive Answers | Azure OpenAI rubric-based semantic evaluation via `/api/evaluate-answer` |
+| Aptitude Tests | Automated numerical and logical answer evaluation |
+
+### Analytics & Reporting
+
+- Score distribution charts and topic mastery heatmaps (`analytics.tsx`)
+- AI-generated natural language performance summaries
+- Power BI Embedded dashboard support
+- Exam audit report with proctoring flags and timestamps
+- Exportable reports (PDF / Excel)
+
+### Admin Dashboard
+
+- Live platform stats: exams, students, teachers, active exams (`organization-settings.tsx`)
+- User management with suspend/reactivate controls
+- Full audit log with severity classification
+- Institution configuration panel
 
 ---
 
@@ -337,21 +200,20 @@ Analytics Dashboard (Microsoft Power BI)
 
 | Role | Key Pages | Permissions |
 |---|---|---|
-| **Super Administrator** | `admin/organization-settings.tsx` | Full platform control: institution onboarding, system config, audit logs |
-| **Faculty / Examiner** | `teacher/dashboard.tsx`, `exam-builder.tsx`, `question-bank.tsx`, `grading.tsx`, `analytics.tsx` | Create, schedule, and monitor exams; view cohort analytics; override AI evaluations |
-| **Student** | `student/exam.tsx`, `join.tsx`, `result.tsx`, `profile.tsx` | Attend assigned exams in the secure monitored environment; view personal results |
+| **Super Administrator** | `admin/organization-settings.tsx` | Full platform control, user management, audit logs, Power BI |
+| **Faculty / Examiner** | `teacher/dashboard.tsx`, `exam-builder.tsx`, `analytics.tsx` | Create, schedule, monitor exams; view analytics; override AI grades |
+| **Student** | `student/exam.tsx`, `join.tsx`, `result.tsx` | Attend exams in secure environment; view personal results |
 
 ---
 
 ## Security and Examination Integrity
 
-- **Secure Authentication** — role-based access using Microsoft Azure Active Directory
-- **Encrypted Cloud Communication** — protected data transfer between the app, AI services, and databases
-- **AI-Based Proctoring** — real-time malpractice detection via `use-proctoring.ts` (webcam, audio, activity)
-- **Audit & Activity Logging** — secure tracking of exam activities, submissions, and admin actions
-- **Secure Data Storage** — protected storage of examination records and candidate information
-- **Tab-Switch & Device Monitoring** — Page Visibility API integration to detect suspicious activity
-- **Automated Security Workflows** — real-time alerts and monitoring using AI and Power Automate
+- **Azure AD MSAL** — enterprise-grade SSO and role enforcement
+- **httpOnly JWT cookies** — XSS-resistant session management (`auth-service.ts`)
+- **AI Key Protection** — Azure OpenAI key never exposed client-side; calls routed through `/api/evaluate-answer` Azure Function
+- **AI Proctoring** — webcam, audio, tab-switch, fullscreen monitoring (`use-proctoring.ts`)
+- **Audit Logging** — every exam action, submission, and violation logged with timestamps
+- **WebAuthn scaffold** — device biometric authentication stub (`biometric-auth.ts`)
 
 ---
 
@@ -359,38 +221,56 @@ Analytics Dashboard (Microsoft Power BI)
 
 ### In Scope
 
-- Unified platform for MCQ, coding, aptitude, and interview assessments
-- AI-powered automated evaluation and performance analysis
+- Unified platform for MCQ, coding, aptitude, descriptive, and interview assessments
+- AI-powered question generation and automated evaluation (Azure OpenAI)
 - Real-time AI proctoring with webcam, audio, and tab monitoring
 - Role-based access for administrators, faculty, and students
-- Integration with Azure OpenAI Service
+- Adaptive difficulty engine with IRT-inspired algorithm
 - Automated workflows, notifications, and report generation
-- Secure cloud-based examination management and data storage
-- Real-time analytics and assessment tracking
+- Power BI Embedded analytics dashboard
+- Secure cloud-based examination management
 
 ### Out of Scope
 
 - Offline examination support without internet connectivity
-- Native mobile application development for iOS and Android
-- Biometric authentication (fingerprint or iris scanning)
+- Native mobile application for iOS and Android
+- Biometric authentication (fingerprint / iris scanning) — WebAuthn scaffold only
 - Blockchain-based certificate generation
-- VR/AR-based examination environments
-- Advanced multilingual AI interview evaluation systems
+- VR/AR examination environments
+- Advanced multilingual AI interview evaluation
 
 ---
 
 ## Future Enhancements
 
-| Enhancement | Description |
+| Enhancement | Foundation in Current Codebase |
 |---|---|
-| Advanced AI Proctoring | Enhanced AI monitoring with improved malpractice and behavioural detection |
-| Adaptive Examination System | AI-based difficulty adjustment according to candidate performance |
-| Real-Time Interview Evaluation | Automated AI scoring and analysis during technical interviews |
-| Multi-Language Support | Support for regional language-based examinations and evaluations |
-| Advanced Analytics Dashboard | Deeper performance insights and predictive student analysis |
-| Mobile Application Integration | Cross-platform mobile access for students and administrators |
-| Cloud Scalability Enhancements | Improved scalability and performance using advanced cloud services |
-| AI-Based Report Generation | Automated generation of detailed assessment and performance reports |
+| Advanced AI Proctoring | `use-proctoring.ts` — extensible hook architecture |
+| Adaptive Examination System | `adaptive-difficulty.ts` — IRT algorithm ready for integration with `exam.tsx` |
+| Behavioral Biometric Verification | `biometric-auth.ts` — WebAuthn + keystroke dynamics scaffold |
+| Enhanced NLP Evaluation | `/api/evaluate-answer` — Azure OpenAI pipeline already wired |
+| Predictive Power BI Dashboards | `VITE_POWERBI_EMBED_URL` env var already consumed in `analytics.tsx` and `organization-settings.tsx` |
+| Blockchain Result Integrity | Out of scope for current implementation |
+| Mobile Application | Out of scope for current implementation |
+| Enterprise Cloud Scalability | Azure Functions architecture supports horizontal scaling |
+
+---
+
+## Environment Variables
+
+```env
+# Azure OpenAI (server-side only — used by Azure Functions, NEVER in frontend)
+AZURE_OPENAI_ENDPOINT=https://<your-resource>.openai.azure.com
+AZURE_OPENAI_API_KEY=<your-key>
+AZURE_OPENAI_DEPLOYMENT=gpt-4o
+
+# Azure Active Directory
+VITE_AZURE_AD_CLIENT_ID=<your-client-id>
+VITE_AZURE_AD_TENANT_ID=<your-tenant-id>
+
+# Power BI Embedded (optional — activates dashboard in analytics.tsx)
+VITE_POWERBI_EMBED_URL=https://app.powerbi.com/reportEmbed?reportId=...
+```
 
 ---
 
@@ -411,4 +291,4 @@ Analytics Dashboard (Microsoft Power BI)
 
 ---
 
-<p align="center"><strong>ExamVault — Unified AI-Powered Assessment Platform</strong></p>
+**ExamVault — Unified AI-Powered Assessment Platform**
