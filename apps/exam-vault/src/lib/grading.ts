@@ -1,276 +1,297 @@
 /**
- * grading.ts
+ * grading.ts — ExamVault Grading Engine
  *
- * ExamVault grading engine.
- * Supports MCQ, descriptive (keyword-based), coding (test-case-based), and aptitude.
- * All functions are pure and fully testable.
+ * Supports:
+ *  - MCQ / Objective  (instant, with optional negative marking)
+ *  - Aptitude         (numerical / logical)
+ *  - Coding           (test-case-based)
+ *  - Descriptive      (keyword heuristic + Azure OpenAI AI evaluation)
  */
 
-// ── Types ─────────────────────────────────────────────────────────────────────
+// ─── Types ───────────────────────────────────────────────────────────────────
 
-export type GradeLabel = "A+" | "A" | "B" | "C" | "D" | "F";
+export type QuestionType = "mcq" | "coding" | "descriptive" | "aptitude";
 
-export interface MCQGradeParams {
-  correctAnswer: string | undefined;
-  studentAnswer: string | undefined;
-  marks: number;
+export interface GradingResult {
+  score: number;          // 0–maxScore
+  maxScore: number;
+  percentage: number;     // 0–100
+  feedback: string;
+  aiEvaluated: boolean;
+  details?: Record<string, unknown>;
 }
 
-export interface MCQGradeResult {
-  score: number;
-  isCorrect: boolean;
-  isSkipped: boolean;
+export interface MCQQuestion {
+  type: "mcq";
+  correctOption: string;
+  negativeMarking?: number; // fraction deducted on wrong answer, e.g. 0.25
+  maxScore: number;
 }
 
-export interface NegativeMarkingParams {
-  baseScore: number;
-  marks: number;
-  negativeFraction: number;   // e.g. 0.25 means deduct 25% of question marks
-  isSkipped: boolean;
+export interface AptitudeQuestion {
+  type: "aptitude";
+  correctAnswer: string | number;
+  maxScore: number;
 }
 
-export interface DescriptiveGradeParams {
-  modelAnswer: string;
-  studentAnswer: string;
-  maxMarks: number;
-  keywords: string[];
+export interface CodingTestCase {
+  input: string;
+  expectedOutput: string;
+  weight?: number; // relative weight, default 1
 }
 
-export interface DescriptiveGradeResult {
-  score: number;
-  keywordsCovered: number;
-  totalKeywords: number;
-  coveragePercent: number;
+export interface CodingQuestion {
+  type: "coding";
+  testCases: CodingTestCase[];
+  maxScore: number;
 }
 
-export interface TestCaseResult {
-  passed: boolean;
-  input?: string;
-  expectedOutput?: string;
-  actualOutput?: string;
-  executionTimeMs?: number;
+export interface DescriptiveQuestion {
+  type: "descriptive";
+  sampleAnswer: string;
+  keywords: string[];          // fallback keyword list
+  rubric?: string;             // optional rubric for AI grading
+  maxScore: number;
 }
 
-export interface CodingGradeParams {
-  testCaseResults: TestCaseResult[];
-  maxMarks: number;
-}
+export type GradableQuestion =
+  | MCQQuestion
+  | AptitudeQuestion
+  | CodingQuestion
+  | DescriptiveQuestion;
 
-export interface CodingGradeResult {
-  score: number;
-  passedCases: number;
-  totalCases: number;
-  coveragePercent: number;
-}
+// ─── MCQ Grading ─────────────────────────────────────────────────────────────
 
-export interface AptitudeGradeParams {
-  correctAnswer: string | undefined;
-  studentAnswer: string | undefined;
-  marks: number;
-}
+export function gradeMCQ(
+  question: MCQQuestion,
+  studentAnswer: string
+): GradingResult {
+  const correct =
+    studentAnswer.trim().toLowerCase() ===
+    question.correctOption.trim().toLowerCase();
 
-export interface AptitudeGradeResult {
-  score: number;
-  isCorrect: boolean;
-  isSkipped: boolean;
-}
+  let score: number;
+  let feedback: string;
 
-export interface QuestionScore {
-  score: number;
-}
-
-// ── MCQ grading ───────────────────────────────────────────────────────────────
-
-export function gradeMCQ(params: MCQGradeParams): MCQGradeResult {
-  const { correctAnswer, studentAnswer, marks } = params;
-
-  const isSkipped = studentAnswer === undefined || studentAnswer === null || studentAnswer.trim() === "";
-  if (isSkipped) {
-    return { score: 0, isCorrect: false, isSkipped: true };
+  if (correct) {
+    score = question.maxScore;
+    feedback = "Correct answer.";
+  } else if (studentAnswer.trim() === "") {
+    score = 0;
+    feedback = "No answer provided.";
+  } else {
+    const deduction = question.negativeMarking
+      ? question.maxScore * question.negativeMarking
+      : 0;
+    score = Math.max(0, -deduction);
+    feedback = `Incorrect. Correct answer: ${question.correctOption}.`;
   }
 
-  const isCorrect =
-    (correctAnswer?.trim().toLowerCase() ?? "") === (studentAnswer?.trim().toLowerCase() ?? "");
-
   return {
-    score: isCorrect ? marks : 0,
-    isCorrect,
-    isSkipped: false,
+    score,
+    maxScore: question.maxScore,
+    percentage: (score / question.maxScore) * 100,
+    feedback,
+    aiEvaluated: false,
   };
 }
 
-// ── Negative marking ──────────────────────────────────────────────────────────
+// ─── Aptitude Grading ────────────────────────────────────────────────────────
 
-export function applyNegativeMarking(params: NegativeMarkingParams): number {
-  const { baseScore, marks, negativeFraction, isSkipped } = params;
-  if (isSkipped || baseScore > 0) return baseScore;
-  // Wrong answer: deduct fraction of marks, never go below -marks
-  const deduction = Math.min(marks * negativeFraction, marks);
-  return -deduction;
-}
-
-// ── Descriptive grading (keyword coverage) ────────────────────────────────────
-
-export function gradeDescriptive(params: DescriptiveGradeParams): DescriptiveGradeResult {
-  const { modelAnswer: _modelAnswer, studentAnswer, maxMarks, keywords } = params;
-
-  if (!studentAnswer || studentAnswer.trim() === "") {
-    return { score: 0, keywordsCovered: 0, totalKeywords: keywords.length, coveragePercent: 0 };
-  }
-
-  const answerLower = studentAnswer.toLowerCase();
-  const keywordsCovered = keywords.filter((kw) =>
-    answerLower.includes(kw.toLowerCase())
-  ).length;
-
-  const totalKeywords = keywords.length;
-  const coveragePercent = totalKeywords === 0 ? 100 : (keywordsCovered / totalKeywords) * 100;
-  const score = Math.round((coveragePercent / 100) * maxMarks);
-
-  return { score, keywordsCovered, totalKeywords, coveragePercent };
-}
-
-// ── Coding grading (test case results) ───────────────────────────────────────
-
-export function gradeCoding(params: CodingGradeParams): CodingGradeResult {
-  const { testCaseResults, maxMarks } = params;
-
-  if (testCaseResults.length === 0) {
-    return { score: 0, passedCases: 0, totalCases: 0, coveragePercent: 0 };
-  }
-
-  const passedCases = testCaseResults.filter((tc) => tc.passed).length;
-  const totalCases  = testCaseResults.length;
-  const coveragePercent = (passedCases / totalCases) * 100;
-  const score = Math.round((passedCases / totalCases) * maxMarks);
-
-  return { score, passedCases, totalCases, coveragePercent };
-}
-
-// ── Aptitude grading (numeric / short text) ───────────────────────────────────
-
-export function gradeAptitude(params: AptitudeGradeParams): AptitudeGradeResult {
-  const { correctAnswer, studentAnswer, marks } = params;
-
-  const isSkipped = studentAnswer === undefined || studentAnswer === null || studentAnswer.trim() === "";
-  if (isSkipped) return { score: 0, isCorrect: false, isSkipped: true };
-
-  const isCorrect =
-    (correctAnswer?.trim().toLowerCase() ?? "") === (studentAnswer?.trim().toLowerCase() ?? "");
-
-  return { score: isCorrect ? marks : 0, isCorrect, isSkipped: false };
-}
-
-// ── Exam total ────────────────────────────────────────────────────────────────
-
-export function calculateExamScore(responses: QuestionScore[]): number {
-  const raw = responses.reduce((sum, r) => sum + (r.score ?? 0), 0);
-  return Math.max(0, raw);
-}
-
-// ── Percentage ────────────────────────────────────────────────────────────────
-
-export function calculatePercentage(score: number, totalMarks: number): number {
-  if (totalMarks === 0) return 0;
-  return Math.min(100, Math.round((score / totalMarks) * 100 * 10) / 10);
-}
-
-// ── Grade label ───────────────────────────────────────────────────────────────
-
-export function calculateGrade(percentage: number): GradeLabel {
-  if (percentage >= 90) return "A+";
-  if (percentage >= 80) return "A";
-  if (percentage >= 70) return "B";
-  if (percentage >= 60) return "C";
-  if (percentage >= 50) return "D";
-  return "F";
-}
-
-// ── Full exam evaluation ──────────────────────────────────────────────────────
-
-export interface FullExamResult {
-  totalScore: number;
-  totalMarks: number;
-  percentage: number;
-  grade: GradeLabel;
-  passed: boolean;
-  questionResults: Array<MCQGradeResult | DescriptiveGradeResult | CodingGradeResult | AptitudeGradeResult>;
-}
-
-export interface ExamQuestion {
-  type: "mcq" | "descriptive" | "coding" | "aptitude" | "verbal";
-  marks: number;
-  correctAnswer?: string;
-  keywords?: string[];
-  testCaseResults?: TestCaseResult[];
-}
-
-export interface StudentResponse {
-  questionId: string;
-  answer?: string;
-}
-
-export function evaluateExam(
-  questions: ExamQuestion[],
-  responses: StudentResponse[],
-  passingPercentage = 40
-): FullExamResult {
-  const responseMap = new Map(responses.map((r) => [r.questionId, r.answer]));
-  const questionResults: FullExamResult["questionResults"] = [];
-
-  let totalScore = 0;
-  const totalMarks = questions.reduce((s, q) => s + q.marks, 0);
-
-  questions.forEach((q, i) => {
-    const studentAnswer = responseMap.get(String(i)) ?? "";
-
-    switch (q.type) {
-      case "mcq": {
-        const res = gradeMCQ({ correctAnswer: q.correctAnswer, studentAnswer, marks: q.marks });
-        totalScore += res.score;
-        questionResults.push(res);
-        break;
-      }
-      case "descriptive":
-      case "verbal": {
-        const res = gradeDescriptive({
-          modelAnswer: q.correctAnswer ?? "",
-          studentAnswer,
-          maxMarks: q.marks,
-          keywords: q.keywords ?? [],
-        });
-        totalScore += res.score;
-        questionResults.push(res);
-        break;
-      }
-      case "coding": {
-        const res = gradeCoding({
-          testCaseResults: q.testCaseResults ?? [],
-          maxMarks: q.marks,
-        });
-        totalScore += res.score;
-        questionResults.push(res);
-        break;
-      }
-      case "aptitude": {
-        const res = gradeAptitude({ correctAnswer: q.correctAnswer, studentAnswer, marks: q.marks });
-        totalScore += res.score;
-        questionResults.push(res);
-        break;
-      }
-    }
-  });
-
-  const finalScore  = Math.max(0, totalScore);
-  const percentage  = calculatePercentage(finalScore, totalMarks);
-  const grade       = calculateGrade(percentage);
+export function gradeAptitude(
+  question: AptitudeQuestion,
+  studentAnswer: string
+): GradingResult {
+  const correct =
+    String(studentAnswer).trim().toLowerCase() ===
+    String(question.correctAnswer).trim().toLowerCase();
 
   return {
-    totalScore: finalScore,
-    totalMarks,
-    percentage,
-    grade,
-    passed: percentage >= passingPercentage,
-    questionResults,
+    score: correct ? question.maxScore : 0,
+    maxScore: question.maxScore,
+    percentage: correct ? 100 : 0,
+    feedback: correct
+      ? "Correct."
+      : `Incorrect. Expected: ${question.correctAnswer}.`,
+    aiEvaluated: false,
+  };
+}
+
+// ─── Coding Grading ──────────────────────────────────────────────────────────
+
+export function gradeCoding(
+  question: CodingQuestion,
+  studentOutputs: string[]
+): GradingResult {
+  const { testCases, maxScore } = question;
+  const totalWeight = testCases.reduce((sum, tc) => sum + (tc.weight ?? 1), 0);
+
+  let passedWeight = 0;
+  const details: Record<string, unknown> = {};
+
+  testCases.forEach((tc, i) => {
+    const passed =
+      (studentOutputs[i] ?? "").trim() === tc.expectedOutput.trim();
+    const weight = tc.weight ?? 1;
+    if (passed) passedWeight += weight;
+    details[`testCase_${i + 1}`] = { passed, weight };
+  });
+
+  const score = (passedWeight / totalWeight) * maxScore;
+
+  return {
+    score,
+    maxScore,
+    percentage: (score / maxScore) * 100,
+    feedback: `Passed ${passedWeight} of ${totalWeight} weighted test cases.`,
+    aiEvaluated: false,
+    details,
+  };
+}
+
+// ─── Descriptive Grading — Keyword Fallback ──────────────────────────────────
+
+export function gradeDescriptiveKeyword(
+  question: DescriptiveQuestion,
+  studentAnswer: string
+): GradingResult {
+  if (!studentAnswer.trim()) {
+    return {
+      score: 0,
+      maxScore: question.maxScore,
+      percentage: 0,
+      feedback: "No answer provided.",
+      aiEvaluated: false,
+    };
+  }
+
+  const lower = studentAnswer.toLowerCase();
+  const matched = question.keywords.filter((kw) =>
+    lower.includes(kw.toLowerCase())
+  );
+  const ratio = matched.length / Math.max(question.keywords.length, 1);
+  const score = Math.round(ratio * question.maxScore * 10) / 10;
+
+  return {
+    score,
+    maxScore: question.maxScore,
+    percentage: (score / question.maxScore) * 100,
+    feedback: `Keywords matched: ${matched.join(", ") || "none"}.`,
+    aiEvaluated: false,
+    details: { matchedKeywords: matched, totalKeywords: question.keywords.length },
+  };
+}
+
+// ─── Descriptive Grading — Azure OpenAI AI Evaluation ────────────────────────
+
+/**
+ * gradeDescriptiveAI
+ *
+ * Sends the question, rubric, sample answer, and student answer to a
+ * backend proxy endpoint (/api/evaluate-answer) which calls Azure OpenAI.
+ * Falls back to keyword grading if the API call fails.
+ */
+export async function gradeDescriptiveAI(
+  question: DescriptiveQuestion,
+  studentAnswer: string
+): Promise<GradingResult> {
+  if (!studentAnswer.trim()) {
+    return {
+      score: 0,
+      maxScore: question.maxScore,
+      percentage: 0,
+      feedback: "No answer provided.",
+      aiEvaluated: false,
+    };
+  }
+
+  try {
+    const response = await fetch("/api/evaluate-answer", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        sampleAnswer: question.sampleAnswer,
+        rubric: question.rubric ?? "Grade based on accuracy, completeness, and clarity.",
+        maxScore: question.maxScore,
+        studentAnswer,
+      }),
+    });
+
+    if (!response.ok) throw new Error(`API error ${response.status}`);
+
+    const data: { score: number; feedback: string } = await response.json();
+
+    return {
+      score: Math.min(data.score, question.maxScore),
+      maxScore: question.maxScore,
+      percentage: (Math.min(data.score, question.maxScore) / question.maxScore) * 100,
+      feedback: data.feedback,
+      aiEvaluated: true,
+    };
+  } catch (err) {
+    console.warn("AI grading failed, falling back to keyword grading:", err);
+    return gradeDescriptiveKeyword(question, studentAnswer);
+  }
+}
+
+// ─── Unified Grader ──────────────────────────────────────────────────────────
+
+/**
+ * gradeAnswer — top-level dispatcher.
+ * For descriptive questions, uses AI evaluation with keyword fallback.
+ */
+export async function gradeAnswer(
+  question: GradableQuestion,
+  studentAnswer: string | string[]
+): Promise<GradingResult> {
+  switch (question.type) {
+    case "mcq":
+      return gradeMCQ(question, studentAnswer as string);
+
+    case "aptitude":
+      return gradeAptitude(question, studentAnswer as string);
+
+    case "coding":
+      return gradeCoding(question, studentAnswer as string[]);
+
+    case "descriptive":
+      return gradeDescriptiveAI(question, studentAnswer as string);
+
+    default:
+      throw new Error(`Unknown question type`);
+  }
+}
+
+// ─── Batch Grading ───────────────────────────────────────────────────────────
+
+export interface BatchGradingInput {
+  question: GradableQuestion;
+  studentAnswer: string | string[];
+}
+
+export interface BatchGradingResult {
+  totalScore: number;
+  totalMaxScore: number;
+  totalPercentage: number;
+  results: GradingResult[];
+}
+
+export async function gradeExamAttempt(
+  inputs: BatchGradingInput[]
+): Promise<BatchGradingResult> {
+  const results = await Promise.all(
+    inputs.map(({ question, studentAnswer }) =>
+      gradeAnswer(question, studentAnswer)
+    )
+  );
+
+  const totalScore = results.reduce((s, r) => s + r.score, 0);
+  const totalMaxScore = results.reduce((s, r) => s + r.maxScore, 0);
+
+  return {
+    totalScore,
+    totalMaxScore,
+    totalPercentage: totalMaxScore > 0 ? (totalScore / totalMaxScore) * 100 : 0,
+    results,
   };
 }
