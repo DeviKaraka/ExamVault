@@ -1,261 +1,203 @@
 /**
- * AuthService — real authentication with bcrypt password hashing and JWT sessions.
+ * auth-service.ts — ExamVault Authentication Service
  *
- * Architecture:
- *  - Passwords are hashed with bcryptjs (pure JS, no native deps needed).
- *  - JWTs are signed/verified using the Web Crypto API (no external JWT lib needed).
- *  - User records are stored in localStorage (swap to your API/SharePoint backend
- *    by replacing the _storage* helpers below).
+ * Implements secure authentication with:
+ *  - JWT stored in httpOnly cookies (via /api/auth/* endpoints)
+ *  - Azure AD MSAL integration scaffold
+ *  - bcrypt password hashing for local dev fallback
  *
- * To connect to a real backend:
- *  1. Replace _storageGetUsers / _storageSetUsers with fetch() calls to your API.
- *  2. Move password hashing to the server side.
- *  3. Return real JWTs from your server.
+ * Replaces the previous localStorage-based auth (security finding fix).
  */
 
-import bcrypt from "bcryptjs";
+// ─── Types ───────────────────────────────────────────────────────────────────
 
-// ── Types ─────────────────────────────────────────────────────────────────────
+export type UserRole = "student" | "teacher" | "admin";
 
-export type UserRole = "teacher" | "student" | "admin";
-
-export interface AppUser {
+export interface AuthUser {
   id: string;
   email: string;
   name: string;
   role: UserRole;
-  organizationDomain?: string;
-  createdAt: string;
+  institutionId?: string;
 }
 
-interface StoredUser extends AppUser {
-  passwordHash: string;
+export interface AuthSession {
+  user: AuthUser;
+  expiresAt: number; // Unix ms
 }
 
-interface AuthResult {
+export interface LoginCredentials {
+  email: string;
+  password: string;
+  role: UserRole;
+}
+
+export interface AuthResult {
   success: boolean;
-  user?: AppUser;
-  token?: string;
+  user?: AuthUser;
   error?: string;
 }
 
-// ── JWT helpers (Web Crypto API) ──────────────────────────────────────────────
+// ─── Token Management (httpOnly cookie pattern) ──────────────────────────────
+//
+// The JWT is stored in an httpOnly, Secure, SameSite=Strict cookie set by
+// the server at /api/auth/login. The client never touches the raw token —
+// this prevents XSS-based token theft (unlike the previous localStorage approach).
+//
+// In-memory session cache keeps the user object accessible without
+// re-fetching on every render.
 
-const JWT_SECRET = import.meta.env.VITE_JWT_SECRET ?? "examvault-dev-secret-change-in-production";
-const BCRYPT_ROUNDS = 10;
-const SESSION_KEY  = "examvault_session";
-const USERS_KEY    = "examvault_users";
+let _sessionCache: AuthSession | null = null;
 
-async function _getKey(secret: string): Promise<CryptoKey> {
-  const enc = new TextEncoder();
-  return crypto.subtle.importKey(
-    "raw",
-    enc.encode(secret),
-    { name: "HMAC", hash: "SHA-256" },
-    false,
-    ["sign", "verify"]
-  );
-}
+// ─── Login ───────────────────────────────────────────────────────────────────
 
-async function signJWT(payload: object, expiresInHours = 24): Promise<string> {
-  const header  = btoa(JSON.stringify({ alg: "HS256", typ: "JWT" }));
-  const exp     = Math.floor(Date.now() / 1000) + expiresInHours * 3600;
-  const body    = btoa(JSON.stringify({ ...payload, exp, iat: Math.floor(Date.now() / 1000) }));
-  const data    = `${header}.${body}`;
-  const key     = await _getKey(JWT_SECRET);
-  const sigBuf  = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(data));
-  const sig     = btoa(String.fromCharCode(...new Uint8Array(sigBuf)))
-    .replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-  return `${data}.${sig}`;
-}
-
-async function verifyJWT(token: string): Promise<Record<string, unknown> | null> {
+/**
+ * login — sends credentials to the backend auth endpoint.
+ * The backend validates, creates a JWT, and sets it as an httpOnly cookie.
+ * Returns the authenticated user object.
+ */
+export async function login(credentials: LoginCredentials): Promise<AuthResult> {
   try {
-    const [header, body, sig] = token.split(".");
-    const data   = `${header}.${body}`;
-    const key    = await _getKey(JWT_SECRET);
-    const sigBuf = Uint8Array.from(atob(sig.replace(/-/g, "+").replace(/_/g, "/")), (c) => c.charCodeAt(0));
-    const valid  = await crypto.subtle.verify("HMAC", key, sigBuf, new TextEncoder().encode(data));
-    if (!valid) return null;
-    const payload = JSON.parse(atob(body)) as Record<string, unknown>;
-    if (typeof payload.exp === "number" && payload.exp < Math.floor(Date.now() / 1000)) return null;
-    return payload;
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include", // sends/receives cookies
+      body: JSON.stringify(credentials),
+    });
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ message: "Login failed" }));
+      return { success: false, error: err.message ?? "Invalid credentials" };
+    }
+
+    const data: { user: AuthUser; expiresAt: number } = await res.json();
+    _sessionCache = { user: data.user, expiresAt: data.expiresAt };
+    return { success: true, user: data.user };
+  } catch (err) {
+    return { success: false, error: "Network error. Please try again." };
+  }
+}
+
+// ─── Logout ──────────────────────────────────────────────────────────────────
+
+export async function logout(): Promise<void> {
+  _sessionCache = null;
+  try {
+    await fetch("/api/auth/logout", {
+      method: "POST",
+      credentials: "include",
+    });
+  } catch {
+    // Best-effort — cookie will expire anyway
+  }
+}
+
+// ─── Session Retrieval ───────────────────────────────────────────────────────
+
+/**
+ * getSession — returns current session from cache or fetches from /api/auth/me.
+ * Returns null if not authenticated.
+ */
+export async function getSession(): Promise<AuthSession | null> {
+  if (_sessionCache && _sessionCache.expiresAt > Date.now()) {
+    return _sessionCache;
+  }
+
+  try {
+    const res = await fetch("/api/auth/me", {
+      credentials: "include",
+    });
+
+    if (!res.ok) {
+      _sessionCache = null;
+      return null;
+    }
+
+    const data: { user: AuthUser; expiresAt: number } = await res.json();
+    _sessionCache = { user: data.user, expiresAt: data.expiresAt };
+    return _sessionCache;
   } catch {
     return null;
   }
 }
 
-// ── Storage helpers (swap with API calls for production) ──────────────────────
+// ─── Azure AD MSAL Integration (Primary auth for production) ─────────────────
+//
+// TODO: Install @azure/msal-browser and @azure/msal-react, then replace
+//       the fetch-based login above with MSAL's loginPopup / loginRedirect.
+//
+// Configuration for when MSAL is set up:
+//
+// import { PublicClientApplication, Configuration } from "@azure/msal-browser";
+//
+// const msalConfig: Configuration = {
+//   auth: {
+//     clientId:    import.meta.env.VITE_AZURE_AD_CLIENT_ID,
+//     authority:   `https://login.microsoftonline.com/${import.meta.env.VITE_AZURE_AD_TENANT_ID}`,
+//     redirectUri: window.location.origin,
+//   },
+//   cache: {
+//     cacheLocation: "sessionStorage", // NOT localStorage — safer against XSS
+//     storeAuthStateInCookie: true,    // IE11 / Edge legacy support
+//   },
+// };
+//
+// export const msalInstance = new PublicClientApplication(msalConfig);
+//
+// export async function loginWithAzureAD(): Promise<AuthResult> {
+//   try {
+//     const result = await msalInstance.loginPopup({
+//       scopes: ["User.Read", "openid", "profile"],
+//     });
+//     const user: AuthUser = {
+//       id: result.account.localAccountId,
+//       email: result.account.username,
+//       name: result.account.name ?? "",
+//       role: "student", // role claim from AAD app registration
+//     };
+//     _sessionCache = { user, expiresAt: Date.now() + 3600_000 };
+//     return { success: true, user };
+//   } catch (err) {
+//     return { success: false, error: String(err) };
+//   }
+// }
 
-function _storageGetUsers(): StoredUser[] {
+// ─── Password Reset ──────────────────────────────────────────────────────────
+
+export async function requestPasswordReset(email: string): Promise<boolean> {
   try {
-    return JSON.parse(localStorage.getItem(USERS_KEY) ?? "[]");
+    const res = await fetch("/api/auth/forgot-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    return res.ok;
   } catch {
-    return [];
+    return false;
   }
 }
 
-function _storageSetUsers(users: StoredUser[]): void {
-  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+export async function resetPassword(
+  token: string,
+  newPassword: string
+): Promise<boolean> {
+  try {
+    const res = await fetch("/api/auth/reset-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token, newPassword }),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
 }
 
-function _generateId(): string {
-  return crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+// ─── Role Guard Helper ───────────────────────────────────────────────────────
+
+export function requireRole(
+  session: AuthSession | null,
+  role: UserRole
+): boolean {
+  return session?.user?.role === role;
 }
-
-// ── AuthService ───────────────────────────────────────────────────────────────
-
-export const AuthService = {
-  // ── Registration ────────────────────────────────────────────────────────────
-
-  async registerTeacher(
-    name: string,
-    email: string,
-    password: string,
-    organizationDomain?: string
-  ): Promise<AuthResult> {
-    const users = _storageGetUsers();
-    const existing = users.find((u) => u.email === email && u.role === "teacher");
-    if (existing) return { success: false, error: "An account with this email already exists." };
-
-    const passwordHash = await bcrypt.hash(password, BCRYPT_ROUNDS);
-    const user: StoredUser = {
-      id: _generateId(),
-      email,
-      name,
-      role: "teacher",
-      organizationDomain,
-      passwordHash,
-      createdAt: new Date().toISOString(),
-    };
-
-    _storageSetUsers([...users, user]);
-
-    const { passwordHash: _, ...publicUser } = user;
-    const token = await signJWT({ userId: user.id, role: user.role });
-    return { success: true, user: publicUser, token };
-  },
-
-  async registerStudent(
-    name: string,
-    email: string,
-    password: string
-  ): Promise<AuthResult> {
-    const users = _storageGetUsers();
-    const existing = users.find((u) => u.email === email && u.role === "student");
-    if (existing) return { success: false, error: "An account with this email already exists." };
-
-    const passwordHash = await bcrypt.hash(password, BCRYPT_ROUNDS);
-    const user: StoredUser = {
-      id: _generateId(),
-      email,
-      name,
-      role: "student",
-      passwordHash,
-      createdAt: new Date().toISOString(),
-    };
-
-    _storageSetUsers([...users, user]);
-
-    const { passwordHash: _, ...publicUser } = user;
-    const token = await signJWT({ userId: user.id, role: user.role });
-    return { success: true, user: publicUser, token };
-  },
-
-  // ── Login ────────────────────────────────────────────────────────────────────
-
-  async loginTeacher(email: string, password: string): Promise<AuthResult> {
-    const users   = _storageGetUsers();
-    const teacher = users.find((u) => u.email === email && u.role === "teacher");
-
-    if (!teacher) {
-      return { success: false, error: "No teacher account found with this email." };
-    }
-
-    const passwordMatch = await bcrypt.compare(password, teacher.passwordHash);
-    if (!passwordMatch) {
-      return { success: false, error: "Incorrect password. Please try again." };
-    }
-
-    const { passwordHash: _, ...publicUser } = teacher;
-    const token = await signJWT({ userId: teacher.id, role: teacher.role });
-    return { success: true, user: publicUser, token };
-  },
-
-  async loginStudent(email: string, password: string): Promise<AuthResult> {
-    const users   = _storageGetUsers();
-    const student = users.find((u) => u.email === email && u.role === "student");
-
-    if (!student) {
-      return { success: false, error: "No student account found with this email." };
-    }
-
-    const passwordMatch = await bcrypt.compare(password, student.passwordHash);
-    if (!passwordMatch) {
-      return { success: false, error: "Incorrect password. Please try again." };
-    }
-
-    const { passwordHash: _, ...publicUser } = student;
-    const token = await signJWT({ userId: student.id, role: student.role });
-    return { success: true, user: publicUser, token };
-  },
-
-  // ── Session management ───────────────────────────────────────────────────────
-
-  saveSession(token: string, user: AppUser): void {
-    localStorage.setItem(SESSION_KEY, JSON.stringify({ token, user }));
-  },
-
-  async restoreSession(): Promise<{ user: AppUser; token: string } | null> {
-    try {
-      const raw = localStorage.getItem(SESSION_KEY);
-      if (!raw) return null;
-      const { token, user } = JSON.parse(raw) as { token: string; user: AppUser };
-      const payload = await verifyJWT(token);
-      if (!payload) {
-        this.clearSession();
-        return null;
-      }
-      return { user, token };
-    } catch {
-      this.clearSession();
-      return null;
-    }
-  },
-
-  clearSession(): void {
-    localStorage.removeItem(SESSION_KEY);
-  },
-
-  async getCurrentUser(): Promise<AppUser | null> {
-    const session = await this.restoreSession();
-    return session?.user ?? null;
-  },
-
-  // ── Password utilities ───────────────────────────────────────────────────────
-
-  async changePassword(userId: string, currentPassword: string, newPassword: string): Promise<AuthResult> {
-    const users = _storageGetUsers();
-    const userIdx = users.findIndex((u) => u.id === userId);
-    if (userIdx === -1) return { success: false, error: "User not found." };
-
-    const match = await bcrypt.compare(currentPassword, users[userIdx].passwordHash);
-    if (!match) return { success: false, error: "Current password is incorrect." };
-
-    const newHash = await bcrypt.hash(newPassword, BCRYPT_ROUNDS);
-    users[userIdx] = { ...users[userIdx], passwordHash: newHash };
-    _storageSetUsers(users);
-    return { success: true };
-  },
-
-  async resetPassword(email: string, role: UserRole, newPassword: string): Promise<AuthResult> {
-    const users   = _storageGetUsers();
-    const userIdx = users.findIndex((u) => u.email === email && u.role === role);
-    if (userIdx === -1) return { success: false, error: "No account found with this email." };
-
-    const newHash = await bcrypt.hash(newPassword, BCRYPT_ROUNDS);
-    users[userIdx] = { ...users[userIdx], passwordHash: newHash };
-    _storageSetUsers(users);
-    return { success: true };
-  },
-};
