@@ -1,240 +1,145 @@
+/**
+ * ai-question-generator.tsx — AI-Powered Question Generation UI
+ *
+ * Security fix: Azure OpenAI API key is NO LONGER called client-side.
+ * All requests go through POST /api/generate-questions (Azure Function proxy).
+ * This prevents credential leakage in the browser.
+ */
+
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
-import { Spinner } from "@/components/ui/spinner";
-import { toast } from "sonner";
+import { Button } from "./ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Input } from "./ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { Badge } from "./ui/badge";
+import { Spinner } from "./ui/spinner";
 
-// ── Types ────────────────────────────────────────────────────────────────────
+// ─── Types ───────────────────────────────────────────────────────────────────
 
-export type QuestionType = "mcq" | "coding" | "descriptive" | "aptitude" | "verbal";
-export type DifficultyLevel = "easy" | "medium" | "hard";
+type QuestionType = "mcq" | "coding" | "descriptive" | "aptitude" | "verbal";
+type DifficultyLevel = "easy" | "medium" | "hard";
 
-export interface MCQOption {
-  id: string;
-  text: string;
-}
-
-export interface GeneratedQuestion {
-  id: string;
-  type: QuestionType;
-  text: string;
-  options?: MCQOption[];          // MCQ only
-  correctAnswer?: string;         // MCQ option id or descriptive answer
-  explanation?: string;
-  marks: number;
-  difficulty: DifficultyLevel;
-  topic: string;
-  codeTemplate?: string;          // coding questions
-  testCases?: { input: string; expected: string }[];
-}
-
-interface GeneratorFormState {
+interface GenerateRequest {
   subject: string;
   topic: string;
-  questionType: QuestionType;
   difficulty: DifficultyLevel;
+  questionType: QuestionType;
   count: number;
 }
 
-interface AIQuestionGeneratorProps {
+interface GeneratedQuestion {
+  id: string;
+  type: QuestionType;
+  difficulty: DifficultyLevel;
+  question: string;
+  options?: string[];          // MCQ
+  correctAnswer?: string;
+  sampleAnswer?: string;       // Descriptive
+  testCases?: { input: string; output: string }[]; // Coding
+  keywords?: string[];         // Descriptive keywords
+  marks: number;
+}
+
+// ─── Main Component ──────────────────────────────────────────────────────────
+
+export default function AIQuestionGenerator({
+  onQuestionsGenerated,
+}: {
   onQuestionsGenerated?: (questions: GeneratedQuestion[]) => void;
-}
-
-// ── Azure OpenAI helper ───────────────────────────────────────────────────────
-
-const AZURE_OPENAI_ENDPOINT = import.meta.env.VITE_AZURE_OPENAI_ENDPOINT as string;
-const AZURE_OPENAI_API_KEY  = import.meta.env.VITE_AZURE_OPENAI_API_KEY  as string;
-const AZURE_OPENAI_DEPLOYMENT = import.meta.env.VITE_AZURE_OPENAI_DEPLOYMENT ?? "gpt-4";
-const AZURE_OPENAI_API_VERSION = import.meta.env.VITE_AZURE_OPENAI_API_VERSION ?? "2024-02-01";
-
-async function callAzureOpenAI(systemPrompt: string, userPrompt: string): Promise<string> {
-  if (!AZURE_OPENAI_ENDPOINT || !AZURE_OPENAI_API_KEY) {
-    throw new Error(
-      "Azure OpenAI credentials are not configured. " +
-      "Set VITE_AZURE_OPENAI_ENDPOINT and VITE_AZURE_OPENAI_API_KEY in your .env file."
-    );
-  }
-
-  const url = `${AZURE_OPENAI_ENDPOINT}/openai/deployments/${AZURE_OPENAI_DEPLOYMENT}/chat/completions?api-version=${AZURE_OPENAI_API_VERSION}`;
-
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "api-key": AZURE_OPENAI_API_KEY,
-    },
-    body: JSON.stringify({
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user",   content: userPrompt },
-      ],
-      temperature: 0.7,
-      max_tokens: 4000,
-      response_format: { type: "json_object" },
-    }),
-  });
-
-  if (!response.ok) {
-    const errorBody = await response.text();
-    throw new Error(`Azure OpenAI API error ${response.status}: ${errorBody}`);
-  }
-
-  const data = await response.json();
-  const content = data.choices?.[0]?.message?.content;
-  if (!content) throw new Error("Empty response from Azure OpenAI");
-  return content;
-}
-
-function buildSystemPrompt(): string {
-  return `You are ExamVault's AI question generation engine.
-Always respond with a valid JSON object matching this exact schema:
-{
-  "questions": [
-    {
-      "id": "string (uuid-like)",
-      "type": "mcq | coding | descriptive | aptitude | verbal",
-      "text": "string",
-      "options": [{ "id": "a|b|c|d", "text": "string" }],   // MCQ only
-      "correctAnswer": "string",
-      "explanation": "string",
-      "marks": number,
-      "difficulty": "easy | medium | hard",
-      "topic": "string",
-      "codeTemplate": "string",                              // coding only
-      "testCases": [{ "input": "string", "expected": "string" }]  // coding only
-    }
-  ]
-}
-Rules:
-- For MCQ: always include exactly 4 options (a, b, c, d) and set correctAnswer to the option id.
-- For coding: include a codeTemplate stub and at least 2 testCases.
-- For descriptive/verbal: omit options, set correctAnswer to a model answer.
-- marks should be 1 for easy, 2 for medium, 3 for hard.
-- Do NOT wrap the JSON in markdown code fences.`;
-}
-
-function buildUserPrompt(form: GeneratorFormState): string {
-  return `Generate ${form.count} ${form.difficulty} ${form.questionType} question(s) for:
-Subject: ${form.subject}
-Topic: ${form.topic}
-Ensure each question is unique, educationally sound, and appropriate for an academic exam.`;
-}
-
-function parseQuestionsFromResponse(raw: string): GeneratedQuestion[] {
-  try {
-    const parsed = JSON.parse(raw);
-    const questions: GeneratedQuestion[] = parsed.questions ?? parsed ?? [];
-    // Assign proper IDs if missing
-    return questions.map((q, i) => ({
-      ...q,
-      id: q.id || `ai-q-${Date.now()}-${i}`,
-    }));
-  } catch {
-    throw new Error("Failed to parse AI response as JSON. Raw response: " + raw.slice(0, 200));
-  }
-}
-
-// ── Component ────────────────────────────────────────────────────────────────
-
-export function AIQuestionGenerator({ onQuestionsGenerated }: AIQuestionGeneratorProps) {
-  const [form, setForm] = useState<GeneratorFormState>({
+}) {
+  const [form, setForm] = useState<GenerateRequest>({
     subject: "",
     topic: "",
-    questionType: "mcq",
     difficulty: "medium",
+    questionType: "mcq",
     count: 5,
   });
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [generatedQuestions, setGeneratedQuestions] = useState<GeneratedQuestion[]>([]);
+  const [questions, setQuestions] = useState<GeneratedQuestion[]>([]);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [elapsed, setElapsed] = useState<number | null>(null);
 
-  const handleGenerate = async () => {
+  async function handleGenerate() {
     if (!form.subject.trim() || !form.topic.trim()) {
-      toast.error("Please fill in Subject and Topic before generating.");
+      setError("Please enter both subject and topic.");
       return;
     }
 
-    setIsLoading(true);
+    setLoading(true);
     setError(null);
-    setGeneratedQuestions([]);
+    setElapsed(null);
+    const start = Date.now();
 
     try {
-      const rawResponse = await callAzureOpenAI(
-        buildSystemPrompt(),
-        buildUserPrompt(form)
-      );
+      // ✅ API key stays server-side — this calls the Azure Function proxy
+      const res = await fetch("/api/generate-questions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(form),
+      });
 
-      const questions = parseQuestionsFromResponse(rawResponse);
-
-      if (questions.length === 0) {
-        throw new Error("AI returned no questions. Try adjusting your inputs.");
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error ?? `Server error ${res.status}`);
       }
 
-      setGeneratedQuestions(questions);
-      onQuestionsGenerated?.(questions);
-      toast.success(`Successfully generated ${questions.length} question(s) using Azure OpenAI.`);
+      const data: { questions: GeneratedQuestion[] } = await res.json();
+      setQuestions(data.questions);
+      setElapsed(Math.round((Date.now() - start) / 1000));
+      onQuestionsGenerated?.(data.questions);
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Unknown error occurred";
-      setError(message);
-      toast.error("Question generation failed: " + message);
+      setError(String(err));
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
-  };
+  }
 
-  const handleClearResults = () => {
-    setGeneratedQuestions([]);
-    setError(null);
-  };
+  function updateForm<K extends keyof GenerateRequest>(key: K, value: GenerateRequest[K]) {
+    setForm((prev) => ({ ...prev, [key]: value }));
+  }
 
   return (
     <div className="space-y-6">
-      {/* ── Form ── */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            AI Question Generator
-            <Badge variant="secondary" className="text-xs">Azure OpenAI</Badge>
+            <span>🤖</span> AI Question Generator
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-1">
-              <label className="text-sm font-medium">Subject *</label>
+            <div>
+              <label className="text-sm font-medium">Subject</label>
               <Input
-                placeholder="e.g. Data Structures"
+                className="mt-1"
+                placeholder="e.g. Computer Science"
                 value={form.subject}
-                onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))}
-                disabled={isLoading}
+                onChange={(e) => updateForm("subject", e.target.value)}
               />
             </div>
-
-            <div className="space-y-1">
-              <label className="text-sm font-medium">Topic *</label>
+            <div>
+              <label className="text-sm font-medium">Topic</label>
               <Input
+                className="mt-1"
                 placeholder="e.g. Binary Trees"
                 value={form.topic}
-                onChange={(e) => setForm((f) => ({ ...f, topic: e.target.value }))}
-                disabled={isLoading}
+                onChange={(e) => updateForm("topic", e.target.value)}
               />
             </div>
 
-            <div className="space-y-1">
+            <div>
               <label className="text-sm font-medium">Question Type</label>
               <Select
                 value={form.questionType}
-                onValueChange={(v) => setForm((f) => ({ ...f, questionType: v as QuestionType }))}
-                disabled={isLoading}
+                onValueChange={(v) => updateForm("questionType", v as QuestionType)}
               >
-                <SelectTrigger>
+                <SelectTrigger className="mt-1">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="mcq">Multiple Choice (MCQ)</SelectItem>
+                  <SelectItem value="mcq">MCQ</SelectItem>
                   <SelectItem value="coding">Coding</SelectItem>
                   <SelectItem value="descriptive">Descriptive</SelectItem>
                   <SelectItem value="aptitude">Aptitude</SelectItem>
@@ -243,14 +148,13 @@ export function AIQuestionGenerator({ onQuestionsGenerated }: AIQuestionGenerato
               </Select>
             </div>
 
-            <div className="space-y-1">
+            <div>
               <label className="text-sm font-medium">Difficulty</label>
               <Select
                 value={form.difficulty}
-                onValueChange={(v) => setForm((f) => ({ ...f, difficulty: v as DifficultyLevel }))}
-                disabled={isLoading}
+                onValueChange={(v) => updateForm("difficulty", v as DifficultyLevel)}
               >
-                <SelectTrigger>
+                <SelectTrigger className="mt-1">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -261,133 +165,105 @@ export function AIQuestionGenerator({ onQuestionsGenerated }: AIQuestionGenerato
               </Select>
             </div>
 
-            <div className="space-y-1">
+            <div>
               <label className="text-sm font-medium">Number of Questions</label>
               <Input
+                className="mt-1"
                 type="number"
                 min={1}
                 max={20}
                 value={form.count}
-                onChange={(e) =>
-                  setForm((f) => ({ ...f, count: Math.max(1, Math.min(20, Number(e.target.value))) }))
-                }
-                disabled={isLoading}
+                onChange={(e) => updateForm("count", Number(e.target.value))}
               />
             </div>
           </div>
 
-          <Button
-            onClick={handleGenerate}
-            disabled={isLoading}
-            className="w-full md:w-auto"
-          >
-            {isLoading ? (
-              <>
-                <Spinner className="mr-2 h-4 w-4" />
-                Generating with Azure OpenAI…
-              </>
-            ) : (
-              "Generate Questions"
+          {error && (
+            <p className="text-sm text-red-500 bg-red-50 border border-red-200 rounded px-3 py-2">
+              {error}
+            </p>
+          )}
+
+          <div className="flex items-center gap-3">
+            <Button onClick={handleGenerate} disabled={loading}>
+              {loading ? (
+                <>
+                  <Spinner className="mr-2 h-4 w-4" />
+                  Generating with Azure OpenAI…
+                </>
+              ) : (
+                "Generate Questions"
+              )}
+            </Button>
+            {elapsed !== null && (
+              <span className="text-xs text-muted-foreground">
+                Generated in {elapsed}s
+              </span>
             )}
-          </Button>
+          </div>
         </CardContent>
       </Card>
 
-      {/* ── Error state ── */}
-      {error && (
-        <Card className="border-destructive">
-          <CardContent className="pt-4">
-            <p className="text-sm text-destructive font-medium">Generation Error</p>
-            <p className="text-sm text-muted-foreground mt-1">{error}</p>
-            {error.includes("credentials") && (
-              <p className="text-xs text-muted-foreground mt-2">
-                Add <code>VITE_AZURE_OPENAI_ENDPOINT</code> and{" "}
-                <code>VITE_AZURE_OPENAI_API_KEY</code> to your <code>.env</code> file.
-              </p>
-            )}
-          </CardContent>
-        </Card>
-      )}
+      {/* Generated Questions Preview */}
+      {questions.length > 0 && (
+        <div className="space-y-3">
+          <h3 className="font-semibold">
+            Generated Questions ({questions.length})
+          </h3>
+          {questions.map((q, i) => (
+            <Card key={q.id}>
+              <CardContent className="pt-4">
+                <div className="flex items-start justify-between gap-2 mb-2">
+                  <span className="text-sm font-medium">Q{i + 1}. {q.question}</span>
+                  <div className="flex gap-1 shrink-0">
+                    <Badge variant="outline">{q.type}</Badge>
+                    <Badge
+                      variant={
+                        q.difficulty === "hard"
+                          ? "destructive"
+                          : q.difficulty === "medium"
+                          ? "secondary"
+                          : "default"
+                      }
+                    >
+                      {q.difficulty}
+                    </Badge>
+                    <Badge variant="outline">{q.marks}m</Badge>
+                  </div>
+                </div>
 
-      {/* ── Results ── */}
-      {generatedQuestions.length > 0 && (
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="text-base">
-              Generated Questions ({generatedQuestions.length})
-            </CardTitle>
-            <Button variant="ghost" size="sm" onClick={handleClearResults}>
-              Clear
-            </Button>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {generatedQuestions.map((q, index) => (
-              <QuestionCard key={q.id} question={q} index={index} />
-            ))}
-          </CardContent>
-        </Card>
-      )}
-    </div>
-  );
-}
+                {q.options && (
+                  <ul className="ml-4 space-y-1">
+                    {q.options.map((opt, j) => (
+                      <li
+                        key={j}
+                        className={`text-sm ${
+                          opt === q.correctAnswer
+                            ? "text-green-700 font-medium"
+                            : "text-muted-foreground"
+                        }`}
+                      >
+                        {String.fromCharCode(65 + j)}. {opt}
+                        {opt === q.correctAnswer && " ✓"}
+                      </li>
+                    ))}
+                  </ul>
+                )}
 
-// ── Question display card ─────────────────────────────────────────────────────
-
-function QuestionCard({ question, index }: { question: GeneratedQuestion; index: number }) {
-  const difficultyColor: Record<DifficultyLevel, string> = {
-    easy: "bg-green-100 text-green-800",
-    medium: "bg-yellow-100 text-yellow-800",
-    hard: "bg-red-100 text-red-800",
-  };
-
-  return (
-    <div className="border rounded-lg p-4 space-y-3">
-      <div className="flex items-start justify-between gap-2">
-        <p className="text-sm font-medium">
-          Q{index + 1}. {question.text}
-        </p>
-        <div className="flex gap-2 shrink-0">
-          <Badge variant="outline" className="text-xs capitalize">{question.type}</Badge>
-          <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${difficultyColor[question.difficulty]}`}>
-            {question.difficulty}
-          </span>
-          <Badge variant="secondary" className="text-xs">{question.marks} mark{question.marks !== 1 ? "s" : ""}</Badge>
-        </div>
-      </div>
-
-      {question.options && (
-        <ul className="space-y-1 pl-2">
-          {question.options.map((opt) => (
-            <li
-              key={opt.id}
-              className={`text-sm ${opt.id === question.correctAnswer ? "text-green-700 font-medium" : "text-muted-foreground"}`}
-            >
-              ({opt.id}) {opt.text}
-              {opt.id === question.correctAnswer && " ✓"}
-            </li>
+                {q.sampleAnswer && (
+                  <p className="text-xs text-muted-foreground mt-2 italic">
+                    Sample: {q.sampleAnswer.slice(0, 120)}…
+                  </p>
+                )}
+              </CardContent>
+            </Card>
           ))}
-        </ul>
-      )}
 
-      {question.type === "coding" && question.codeTemplate && (
-        <pre className="text-xs bg-muted p-3 rounded-md overflow-x-auto">
-          {question.codeTemplate}
-        </pre>
-      )}
-
-      {question.type !== "mcq" && question.correctAnswer && (
-        <div className="text-xs text-muted-foreground border-t pt-2">
-          <span className="font-medium">Model Answer:</span> {question.correctAnswer}
-        </div>
-      )}
-
-      {question.explanation && (
-        <div className="text-xs text-muted-foreground">
-          <span className="font-medium">Explanation:</span> {question.explanation}
+          <Button variant="outline" onClick={() => onQuestionsGenerated?.(questions)}>
+            Add All to Question Bank
+          </Button>
         </div>
       )}
     </div>
   );
 }
-
-export default AIQuestionGenerator;
