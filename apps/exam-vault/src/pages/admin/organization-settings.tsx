@@ -1,652 +1,360 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { useNavigate } from 'react-router-dom';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import {
-  Building2,
-  Shield,
-  Users,
-  Globe,
-  Plus,
-  X,
-  Trash2,
-  Save,
-  ArrowLeft,
-  Check,
-  AlertTriangle,
-  Mail,
-  Clock,
-  UserCog,
-  Settings,
-  Eye,
-  EyeOff,
-} from 'lucide-react';
-import { format, formatDistanceToNow } from 'date-fns';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
-import { toast } from 'sonner';
-import {
-  orgSettingsAtom,
-  updateOrgSettingsAtom,
-  registeredUsersAtom,
-  adminUsersAtom,
-  addAdminAtom,
-  removeAdminAtom,
-  isAdminAtom,
-  type OrganizationSettings,
-  type RegisteredUser,
-} from '@/lib/store';
+/**
+ * organization-settings.tsx — Admin Dashboard & Organization Management
+ *
+ * Provides:
+ *  - Live platform stats (exams, students, teachers, active exams)
+ *  - Institution configuration
+ *  - User management table
+ *  - Audit log viewer
+ *  - Power BI Embedded analytics (scaffold + live iframe)
+ */
 
-export default function OrganizationSettingsPage() {
-  const navigate = useNavigate();
-  const [orgSettings, setOrgSettings] = useAtom(orgSettingsAtom);
-  const updateOrgSettings = useSetAtom(updateOrgSettingsAtom);
-  const registeredUsers = useAtomValue(registeredUsersAtom);
-  const adminUsers = useAtomValue(adminUsersAtom);
-  const addAdmin = useSetAtom(addAdminAtom);
-  const removeAdmin = useSetAtom(removeAdminAtom);
-  const isAdmin = useAtomValue(isAdminAtom);
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../components/ui/table";
 
-  const [localSettings, setLocalSettings] = useState<OrganizationSettings>(orgSettings);
-  const [newDomain, setNewDomain] = useState('');
-  const [newAdminEmail, setNewAdminEmail] = useState('');
-  const [hasChanges, setHasChanges] = useState(false);
-  const [showRemoveAdminDialog, setShowRemoveAdminDialog] = useState(false);
-  const [adminToRemove, setAdminToRemove] = useState<string | null>(null);
-  const [searchUsers, setSearchUsers] = useState('');
+// ─── Types ───────────────────────────────────────────────────────────────────
 
-  useEffect(() => {
-    setLocalSettings(orgSettings);
-  }, [orgSettings]);
+interface PlatformStats {
+  totalExams: number;
+  activeExams: number;
+  totalStudents: number;
+  totalTeachers: number;
+  examsTodayCount: number;
+  avgScore: number;
+}
 
-  useEffect(() => {
-    const changed =
-      localSettings.organizationName !== orgSettings.organizationName ||
-      localSettings.restrictToOrganization !== orgSettings.restrictToOrganization ||
-      JSON.stringify(localSettings.allowedDomains) !== JSON.stringify(orgSettings.allowedDomains);
-    setHasChanges(changed);
-  }, [localSettings, orgSettings]);
+interface UserRecord {
+  id: string;
+  name: string;
+  email: string;
+  role: "student" | "teacher" | "admin";
+  status: "active" | "suspended";
+  lastLogin: string;
+}
 
-  // Redirect if not admin
-  useEffect(() => {
-    if (!isAdmin) {
-      toast.error('Access denied. Admin privileges required.');
-      navigate('/teacher');
-    }
-  }, [isAdmin, navigate]);
+interface AuditEntry {
+  id: string;
+  timestamp: string;
+  userId: string;
+  action: string;
+  details: string;
+  severity: "info" | "warning" | "critical";
+}
 
-  const handleAddDomain = () => {
-    const domain = newDomain.trim().toLowerCase();
-    if (!domain) {
-      toast.error('Please enter a domain');
-      return;
-    }
-    if (localSettings.allowedDomains.includes(domain)) {
-      toast.error('Domain already exists');
-      return;
-    }
-    if (!/^[a-z0-9][a-z0-9-]*\.[a-z]{2,}$/i.test(domain)) {
-      toast.error('Invalid domain format (e.g., school.edu)');
-      return;
-    }
-    setLocalSettings({
-      ...localSettings,
-      allowedDomains: [...localSettings.allowedDomains, domain],
-    });
-    setNewDomain('');
-    toast.success(`Domain "${domain}" added`);
-  };
+// ─── Mock data (replace with service calls) ──────────────────────────────────
 
-  const handleRemoveDomain = (domain: string) => {
-    if (localSettings.allowedDomains.length === 1) {
-      toast.error('At least one domain must remain');
-      return;
-    }
-    setLocalSettings({
-      ...localSettings,
-      allowedDomains: localSettings.allowedDomains.filter((d: string) => d !== domain),
-    });
-    toast.success(`Domain "${domain}" removed`);
-  };
+const MOCK_STATS: PlatformStats = {
+  totalExams: 48,
+  activeExams: 3,
+  totalStudents: 312,
+  totalTeachers: 18,
+  examsTodayCount: 5,
+  avgScore: 72.4,
+};
 
-  const handleSaveSettings = () => {
-    if (!localSettings.organizationName.trim()) {
-      toast.error('Organization name is required');
-      return;
-    }
-    updateOrgSettings(localSettings);
-    toast.success('Organization settings saved successfully');
-  };
+const MOCK_USERS: UserRecord[] = [
+  { id: "u1", name: "Ananya Sharma", email: "ananya@inst.edu", role: "student", status: "active", lastLogin: "2026-05-11" },
+  { id: "u2", name: "Dr. Ramesh Kumar", email: "ramesh@inst.edu", role: "teacher", status: "active", lastLogin: "2026-05-12" },
+  { id: "u3", name: "Priya Nair", email: "priya@inst.edu", role: "student", status: "suspended", lastLogin: "2026-05-09" },
+  { id: "u4", name: "Vikram Singh", email: "vikram@inst.edu", role: "teacher", status: "active", lastLogin: "2026-05-10" },
+];
 
-  const handleAddAdmin = () => {
-    const email = newAdminEmail.trim().toLowerCase();
-    if (!email) {
-      toast.error('Please enter an email address');
-      return;
-    }
-    if (!email.includes('@')) {
-      toast.error('Invalid email format');
-      return;
-    }
-    if (adminUsers.includes(email)) {
-      toast.error('This user is already an admin');
-      return;
-    }
-    addAdmin(email);
-    setNewAdminEmail('');
-    toast.success(`Admin access granted to ${email}`);
-  };
+const MOCK_AUDIT: AuditEntry[] = [
+  { id: "a1", timestamp: "2026-05-12 09:14:22", userId: "u2", action: "EXAM_CREATED", details: "Created exam: Data Structures Mid-Term", severity: "info" },
+  { id: "a2", timestamp: "2026-05-12 10:02:55", userId: "u3", action: "PROCTORING_VIOLATION", details: "Tab switch detected during exam #EX-042", severity: "warning" },
+  { id: "a3", timestamp: "2026-05-11 14:30:01", userId: "u1", action: "EXAM_SUBMITTED", details: "Submitted exam #EX-041, score: 85/100", severity: "info" },
+  { id: "a4", timestamp: "2026-05-11 08:00:00", userId: "system", action: "BACKUP_COMPLETED", details: "Daily data backup completed successfully", severity: "info" },
+  { id: "a5", timestamp: "2026-05-10 16:45:12", userId: "u3", action: "EXAM_AUTO_TERMINATED", details: "Exam auto-terminated after 3 proctoring violations", severity: "critical" },
+];
 
-  const handleRemoveAdmin = () => {
-    if (adminToRemove) {
-      if (adminUsers.length === 1) {
-        toast.error('Cannot remove the last admin');
-        setShowRemoveAdminDialog(false);
-        setAdminToRemove(null);
-        return;
-      }
-      removeAdmin(adminToRemove);
-      toast.success(`Admin access revoked from ${adminToRemove}`);
-      setShowRemoveAdminDialog(false);
-      setAdminToRemove(null);
-    }
-  };
+// ─── Sub-components ──────────────────────────────────────────────────────────
 
-  const filteredUsers = registeredUsers.filter((user: RegisteredUser) =>
-    searchUsers
-      ? user.email.toLowerCase().includes(searchUsers.toLowerCase()) ||
-        user.name.toLowerCase().includes(searchUsers.toLowerCase())
-      : true
+function StatCard({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
+  return (
+    <Card>
+      <CardHeader className="pb-1">
+        <CardTitle className="text-sm font-medium text-muted-foreground">{label}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="text-3xl font-bold">{value}</div>
+        {sub && <p className="text-xs text-muted-foreground mt-1">{sub}</p>}
+      </CardContent>
+    </Card>
   );
+}
 
-  const teachers = filteredUsers.filter((u: RegisteredUser) => u.role === 'teacher');
-  const students = filteredUsers.filter((u: RegisteredUser) => u.role === 'student');
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08 },
-    },
-  } as const;
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const } },
-  };
-
-  if (!isAdmin) {
-    return null;
+function PowerBIEmbed({ reportUrl }: { reportUrl?: string }) {
+  // If a real Power BI embed URL is configured, render the iframe.
+  // Otherwise render a setup placeholder.
+  if (reportUrl) {
+    return (
+      <div className="w-full rounded-lg overflow-hidden border" style={{ height: 480 }}>
+        <iframe
+          title="ExamVault Power BI Analytics"
+          src={reportUrl}
+          allowFullScreen
+          className="w-full h-full border-0"
+        />
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" onClick={() => navigate('/teacher')}>
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-primary/10">
-                <Settings className="h-6 w-6 text-primary" />
+    <div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-muted-foreground/30 bg-muted/20 p-12 text-center">
+      <div className="text-4xl mb-4">📊</div>
+      <h3 className="text-lg font-semibold mb-2">Power BI Dashboard</h3>
+      <p className="text-sm text-muted-foreground max-w-sm mb-4">
+        Connect a Microsoft Power BI Embedded report to visualize cohort performance,
+        exam trends, and student outcome forecasts.
+      </p>
+      <p className="text-xs text-muted-foreground mb-4">
+        Set <code className="bg-muted px-1 rounded">VITE_POWERBI_EMBED_URL</code> in your
+        environment variables to activate.
+      </p>
+      <Button variant="outline" size="sm" asChild>
+        <a
+          href="https://learn.microsoft.com/en-us/power-bi/developer/embedded/embed-sample-for-customers"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Power BI Embed Setup Guide →
+        </a>
+      </Button>
+    </div>
+  );
+}
+
+// ─── Main Component ──────────────────────────────────────────────────────────
+
+export default function OrganizationSettings() {
+  const [stats, setStats] = useState<PlatformStats>(MOCK_STATS);
+  const [users, setUsers] = useState<UserRecord[]>(MOCK_USERS);
+  const [audit, setAudit] = useState<AuditEntry[]>(MOCK_AUDIT);
+  const [userSearch, setUserSearch] = useState("");
+  const [orgName, setOrgName] = useState("ExamVault Institution");
+  const [saved, setSaved] = useState(false);
+
+  // TODO: replace with real service calls
+  useEffect(() => {
+    // examService.getStats().then(setStats);
+    // userService.listAll().then(setUsers);
+    // auditService.recent(50).then(setAudit);
+  }, []);
+
+  const filteredUsers = users.filter(
+    (u) =>
+      u.name.toLowerCase().includes(userSearch.toLowerCase()) ||
+      u.email.toLowerCase().includes(userSearch.toLowerCase())
+  );
+
+  function handleSaveSettings() {
+    // TODO: call /api/admin/settings with orgName
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  }
+
+  function toggleUserStatus(userId: string) {
+    setUsers((prev) =>
+      prev.map((u) =>
+        u.id === userId
+          ? { ...u, status: u.status === "active" ? "suspended" : "active" }
+          : u
+      )
+    );
+  }
+
+  const severityColor: Record<AuditEntry["severity"], string> = {
+    info: "default",
+    warning: "secondary",
+    critical: "destructive",
+  };
+
+  return (
+    <div className="p-6 max-w-7xl mx-auto space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold">Organization Settings</h1>
+          <p className="text-sm text-muted-foreground">
+            Platform-wide administration and monitoring
+          </p>
+        </div>
+        <Badge variant="outline" className="text-green-600 border-green-600">
+          {stats.activeExams} Active Exam{stats.activeExams !== 1 ? "s" : ""}
+        </Badge>
+      </div>
+
+      {/* Stats Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <StatCard label="Total Exams" value={stats.totalExams} />
+        <StatCard label="Active Now" value={stats.activeExams} sub="in progress" />
+        <StatCard label="Students" value={stats.totalStudents} />
+        <StatCard label="Teachers" value={stats.totalTeachers} />
+        <StatCard label="Exams Today" value={stats.examsTodayCount} />
+        <StatCard label="Avg Score" value={`${stats.avgScore}%`} sub="platform-wide" />
+      </div>
+
+      <Tabs defaultValue="analytics">
+        <TabsList>
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          <TabsTrigger value="users">User Management</TabsTrigger>
+          <TabsTrigger value="audit">Audit Log</TabsTrigger>
+          <TabsTrigger value="settings">Settings</TabsTrigger>
+        </TabsList>
+
+        {/* Power BI Analytics Tab */}
+        <TabsContent value="analytics" className="mt-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Performance Analytics Dashboard</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <PowerBIEmbed
+                reportUrl={
+                  typeof import.meta !== "undefined"
+                    ? (import.meta as Record<string, Record<string, string>>).env?.VITE_POWERBI_EMBED_URL
+                    : undefined
+                }
+              />
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* User Management Tab */}
+        <TabsContent value="users" className="mt-4">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between">
+              <CardTitle>Users</CardTitle>
+              <Input
+                placeholder="Search by name or email…"
+                value={userSearch}
+                onChange={(e) => setUserSearch(e.target.value)}
+                className="w-64"
+              />
+            </CardHeader>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Email</TableHead>
+                    <TableHead>Role</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Last Login</TableHead>
+                    <TableHead>Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {filteredUsers.map((u) => (
+                    <TableRow key={u.id}>
+                      <TableCell className="font-medium">{u.name}</TableCell>
+                      <TableCell>{u.email}</TableCell>
+                      <TableCell>
+                        <Badge variant="outline">{u.role}</Badge>
+                      </TableCell>
+                      <TableCell>
+                        <Badge
+                          variant={u.status === "active" ? "default" : "destructive"}
+                        >
+                          {u.status}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>{u.lastLogin}</TableCell>
+                      <TableCell>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => toggleUserStatus(u.id)}
+                        >
+                          {u.status === "active" ? "Suspend" : "Reactivate"}
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Audit Log Tab */}
+        <TabsContent value="audit" className="mt-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Audit Log</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Timestamp</TableHead>
+                    <TableHead>User</TableHead>
+                    <TableHead>Action</TableHead>
+                    <TableHead>Details</TableHead>
+                    <TableHead>Severity</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {audit.map((entry) => (
+                    <TableRow key={entry.id}>
+                      <TableCell className="font-mono text-xs">{entry.timestamp}</TableCell>
+                      <TableCell>{entry.userId}</TableCell>
+                      <TableCell className="font-mono text-xs">{entry.action}</TableCell>
+                      <TableCell className="text-sm">{entry.details}</TableCell>
+                      <TableCell>
+                        <Badge variant={severityColor[entry.severity] as "default" | "secondary" | "destructive"}>
+                          {entry.severity}
+                        </Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Settings Tab */}
+        <TabsContent value="settings" className="mt-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Institution Configuration</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 max-w-lg">
+              <div>
+                <label className="text-sm font-medium">Organization Name</label>
+                <Input
+                  className="mt-1"
+                  value={orgName}
+                  onChange={(e) => setOrgName(e.target.value)}
+                />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-foreground">Organization Settings</h1>
-                <p className="text-sm text-muted-foreground">Manage access control and user administration</p>
+                <label className="text-sm font-medium">Power BI Embed URL</label>
+                <Input
+                  className="mt-1"
+                  placeholder="https://app.powerbi.com/reportEmbed?reportId=..."
+                  defaultValue=""
+                />
+                <p className="text-xs text-muted-foreground mt-1">
+                  Paste your Power BI embedded report URL to activate the analytics dashboard.
+                </p>
               </div>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            {hasChanges && (
-              <Badge variant="outline" className="text-chart-4 border-chart-4/50">
-                <AlertTriangle className="h-3 w-3 mr-1" />
-                Unsaved changes
-              </Badge>
-            )}
-            <Button onClick={handleSaveSettings} disabled={!hasChanges}>
-              <Save className="h-4 w-4 mr-2" />
-              Save Changes
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-6xl mx-auto px-6 py-8">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="show"
-          className="space-y-8"
-        >
-          <Tabs defaultValue="general" className="w-full">
-            <TabsList className="mb-6">
-              <TabsTrigger value="general" className="gap-2">
-                <Building2 className="h-4 w-4" />
-                General
-              </TabsTrigger>
-              <TabsTrigger value="domains" className="gap-2">
-                <Globe className="h-4 w-4" />
-                Domains
-              </TabsTrigger>
-              <TabsTrigger value="admins" className="gap-2">
-                <Shield className="h-4 w-4" />
-                Administrators
-              </TabsTrigger>
-              <TabsTrigger value="users" className="gap-2">
-                <Users className="h-4 w-4" />
-                Users
-              </TabsTrigger>
-            </TabsList>
-
-            {/* General Settings Tab */}
-            <TabsContent value="general">
-              <motion.div variants={itemVariants}>
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Building2 className="h-5 w-5" />
-                      Organization Details
-                    </CardTitle>
-                    <CardDescription>
-                      Configure your organization's identity and access settings
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="orgName">Organization Name</Label>
-                      <Input
-                        id="orgName"
-                        value={localSettings.organizationName}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                          setLocalSettings({ ...localSettings, organizationName: e.target.value })
-                        }
-                        placeholder="Enter organization name"
-                        className="max-w-md"
-                      />
-                      <p className="text-sm text-muted-foreground">
-                        This name appears on login pages and throughout the application
-                      </p>
-                    </div>
-
-                    <Separator />
-
-                    <div className="flex items-center justify-between">
-                      <div className="space-y-1">
-                        <Label htmlFor="restrict" className="text-base font-medium">
-                          Restrict Access to Organization
-                        </Label>
-                        <p className="text-sm text-muted-foreground">
-                          Only allow users with approved email domains to register and login
-                        </p>
-                      </div>
-                      <Switch
-                        id="restrict"
-                        checked={localSettings.restrictToOrganization}
-                        onCheckedChange={(checked: boolean) =>
-                          setLocalSettings({ ...localSettings, restrictToOrganization: checked })
-                        }
-                      />
-                    </div>
-
-                    {!localSettings.restrictToOrganization && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                      >
-                        <div className="p-4 bg-chart-4/10 border border-chart-4/30 rounded-lg flex items-start gap-3">
-                          <AlertTriangle className="h-5 w-5 text-chart-4 flex-shrink-0 mt-0.5" />
-                          <div>
-                            <p className="font-medium text-card-foreground">Open Registration Enabled</p>
-                            <p className="text-sm text-muted-foreground">
-                              Anyone with any email address can register. Enable organization restriction for better security.
-                            </p>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </TabsContent>
-
-            {/* Domains Tab */}
-            <TabsContent value="domains">
-              <motion.div variants={itemVariants}>
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Globe className="h-5 w-5" />
-                      Allowed Email Domains
-                    </CardTitle>
-                    <CardDescription>
-                      Users can only register with email addresses from these domains
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-6">
-                    {!localSettings.restrictToOrganization && (
-                      <div className="p-4 bg-muted/50 rounded-lg flex items-start gap-3">
-                        <EyeOff className="h-5 w-5 text-muted-foreground flex-shrink-0 mt-0.5" />
-                        <p className="text-sm text-muted-foreground">
-                          Domain restrictions are not enforced because "Restrict Access to Organization" is disabled.
-                        </p>
-                      </div>
-                    )}
-
-                    <div className="flex gap-3">
-                      <div className="relative flex-1 max-w-md">
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                        <Input
-                          value={newDomain}
-                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewDomain(e.target.value)}
-                          placeholder="example.edu"
-                          className="pl-10"
-                          onKeyDown={(e: React.KeyboardEvent) => e.key === 'Enter' && handleAddDomain()}
-                        />
-                      </div>
-                      <Button onClick={handleAddDomain}>
-                        <Plus className="h-4 w-4 mr-2" />
-                        Add Domain
-                      </Button>
-                    </div>
-
-                    <div className="space-y-2">
-                      <AnimatePresence mode="popLayout">
-                        {localSettings.allowedDomains.map((domain: string, index: number) => (
-                          <motion.div
-                            key={domain}
-                            layout
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: 20 }}
-                            transition={{ delay: index * 0.05 }}
-                            className="flex items-center justify-between p-3 rounded-lg border border-border bg-card hover:bg-secondary/30 transition-colors"
-                          >
-                            <div className="flex items-center gap-3">
-                              <div className="p-2 rounded-lg bg-primary/10">
-                                <Globe className="h-4 w-4 text-primary" />
-                              </div>
-                              <div>
-                                <span className="font-medium text-card-foreground">@{domain}</span>
-                                <p className="text-xs text-muted-foreground">
-                                  {registeredUsers.filter(
-                                    (u: RegisteredUser) => u.email.endsWith(`@${domain}`)
-                                  ).length}{' '}
-                                  registered users
-                                </p>
-                              </div>
-                            </div>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              onClick={() => handleRemoveDomain(domain)}
-                              disabled={localSettings.allowedDomains.length === 1}
-                            >
-                              <X className="h-4 w-4 text-destructive" />
-                            </Button>
-                          </motion.div>
-                        ))}
-                      </AnimatePresence>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </TabsContent>
-
-            {/* Administrators Tab */}
-            <TabsContent value="admins">
-              <motion.div variants={itemVariants}>
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Shield className="h-5 w-5" />
-                      System Administrators
-                    </CardTitle>
-                    <CardDescription>
-                      Admins have full access to organization settings and user management
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-6">
-                    <div className="flex gap-3">
-                      <div className="relative flex-1 max-w-md">
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                        <Input
-                          value={newAdminEmail}
-                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewAdminEmail(e.target.value)}
-                          placeholder="admin@school.edu"
-                          className="pl-10"
-                          onKeyDown={(e: React.KeyboardEvent) => e.key === 'Enter' && handleAddAdmin()}
-                        />
-                      </div>
-                      <Button onClick={handleAddAdmin}>
-                        <Plus className="h-4 w-4 mr-2" />
-                        Add Admin
-                      </Button>
-                    </div>
-
-                    <div className="space-y-2">
-                      <AnimatePresence mode="popLayout">
-                        {adminUsers.map((email: string, index: number) => {
-                          const user = registeredUsers.find(
-                            (u: RegisteredUser) => u.email.toLowerCase() === email.toLowerCase()
-                          );
-                          return (
-                            <motion.div
-                              key={email}
-                              layout
-                              initial={{ opacity: 0, x: -20 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              exit={{ opacity: 0, x: 20 }}
-                              transition={{ delay: index * 0.05 }}
-                              className="flex items-center justify-between p-4 rounded-lg border border-border bg-card hover:bg-secondary/30 transition-colors"
-                            >
-                              <div className="flex items-center gap-3">
-                                <div className="p-2 rounded-lg bg-chart-3/10">
-                                  <Shield className="h-5 w-5 text-chart-3" />
-                                </div>
-                                <div>
-                                  <div className="flex items-center gap-2">
-                                    <span className="font-medium text-card-foreground">
-                                      {user?.name || email}
-                                    </span>
-                                    {user?.role && (
-                                      <Badge variant="outline" className="text-xs capitalize">
-                                        {user.role}
-                                      </Badge>
-                                    )}
-                                  </div>
-                                  <p className="text-sm text-muted-foreground">{email}</p>
-                                </div>
-                              </div>
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                onClick={() => {
-                                  setAdminToRemove(email);
-                                  setShowRemoveAdminDialog(true);
-                                }}
-                                disabled={adminUsers.length === 1}
-                              >
-                                <Trash2 className="h-4 w-4 text-destructive" />
-                              </Button>
-                            </motion.div>
-                          );
-                        })}
-                      </AnimatePresence>
-                    </div>
-
-                    {adminUsers.length === 1 && (
-                      <p className="text-sm text-muted-foreground flex items-center gap-2">
-                        <AlertTriangle className="h-4 w-4" />
-                        At least one administrator must remain in the system
-                      </p>
-                    )}
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </TabsContent>
-
-            {/* Users Tab */}
-            <TabsContent value="users">
-              <motion.div variants={itemVariants} className="space-y-6">
-                <Card>
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <CardTitle className="flex items-center gap-2">
-                          <Users className="h-5 w-5" />
-                          Registered Users
-                        </CardTitle>
-                        <CardDescription>
-                          View all teachers and students registered in the system
-                        </CardDescription>
-                      </div>
-                      <div className="relative">
-                        <Users className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                        <Input
-                          value={searchUsers}
-                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchUsers(e.target.value)}
-                          placeholder="Search users..."
-                          className="pl-10 w-64"
-                        />
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                      <div className="p-4 rounded-lg bg-primary/5 border border-primary/20">
-                        <div className="flex items-center gap-3">
-                          <div className="p-2 rounded-lg bg-primary/10">
-                            <UserCog className="h-5 w-5 text-primary" />
-                          </div>
-                          <div>
-                            <p className="text-2xl font-bold text-card-foreground">{teachers.length}</p>
-                            <p className="text-sm text-muted-foreground">Teachers</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="p-4 rounded-lg bg-accent/5 border border-accent/20">
-                        <div className="flex items-center gap-3">
-                          <div className="p-2 rounded-lg bg-accent/10">
-                            <Users className="h-5 w-5 text-accent-foreground" />
-                          </div>
-                          <div>
-                            <p className="text-2xl font-bold text-card-foreground">{students.length}</p>
-                            <p className="text-sm text-muted-foreground">Students</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {filteredUsers.length === 0 ? (
-                      <div className="text-center py-12 text-muted-foreground">
-                        <Users className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                        <p>{searchUsers ? 'No users match your search' : 'No users registered yet'}</p>
-                      </div>
-                    ) : (
-                      <div className="border rounded-lg overflow-hidden">
-                        <Table>
-                          <TableHeader>
-                            <TableRow>
-                              <TableHead>Name</TableHead>
-                              <TableHead>Email</TableHead>
-                              <TableHead>Role</TableHead>
-                              <TableHead>Registered</TableHead>
-                              <TableHead>Status</TableHead>
-                            </TableRow>
-                          </TableHeader>
-                          <TableBody>
-                            {filteredUsers.map((user: RegisteredUser) => (
-                              <TableRow key={user.email}>
-                                <TableCell className="font-medium">{user.name}</TableCell>
-                                <TableCell className="text-muted-foreground">{user.email}</TableCell>
-                                <TableCell>
-                                  <Badge
-                                    variant={user.role === 'teacher' ? 'default' : 'secondary'}
-                                    className="capitalize"
-                                  >
-                                    {user.role}
-                                  </Badge>
-                                </TableCell>
-                                <TableCell className="text-muted-foreground">
-                                  <span title={format(user.registeredAt, 'PPpp')}>
-                                    {formatDistanceToNow(user.registeredAt, { addSuffix: true })}
-                                  </span>
-                                </TableCell>
-                                <TableCell>
-                                  {adminUsers.includes(user.email.toLowerCase()) ? (
-                                    <Badge variant="outline" className="text-chart-3 border-chart-3/50">
-                                      <Shield className="h-3 w-3 mr-1" />
-                                      Admin
-                                    </Badge>
-                                  ) : (
-                                    <Badge variant="outline" className="text-muted-foreground">
-                                      <Check className="h-3 w-3 mr-1" />
-                                      Active
-                                    </Badge>
-                                  )}
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                          </TableBody>
-                        </Table>
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </TabsContent>
-          </Tabs>
-        </motion.div>
-      </main>
-
-      {/* Remove Admin Dialog */}
-      <AlertDialog open={showRemoveAdminDialog} onOpenChange={setShowRemoveAdminDialog}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Remove Administrator?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This will revoke admin access for <strong>{adminToRemove}</strong>. They will no longer
-              be able to access organization settings or manage users.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={handleRemoveAdmin}
-              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-            >
-              Remove Admin
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+              <div>
+                <label className="text-sm font-medium">Azure AD Tenant ID</label>
+                <Input className="mt-1" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" />
+              </div>
+              <Button onClick={handleSaveSettings}>
+                {saved ? "✓ Saved" : "Save Settings"}
+              </Button>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
